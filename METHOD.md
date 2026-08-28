@@ -13,11 +13,19 @@ R.C. 2950.034 bars occupying a home within 1,000 feet of school premises, presch
 
 The premises include the real lot the place sits on. Zones start at that lot, not a geocoded point and not a building footprint.
 
+The home is also the whole lot. Current law says that at R.C. 2950.01(T). In the 2006 code that definition was 2950.01(W).
+
 School premises follow R.C. 2950.01 via the OEDS school-building directory joined to CAGIS lots. A school here is Ohio-limited.
 
 Ohio also counts a school-owned or leased lot if instruction, sports, or training actually happen there. Confirmed athletic lots are already inside the published 38.58 percent state-closed figure (117,997 of 305,868). Leftover untagged owner lots are frozen: 38.58 percent confirmed, ceiling 88.29 percent, best estimate 44.61 percent. Do not use 54.18 percent. That figure stacked overlapping leftover lots and counted the same homes more than once. The 12 rented school sites stay reported, not added.
 
 Inclusion is by license type, never zoning. Licensed child care center and preschool: yes. School-age child care: flagged only; not in the main surface. Type A/B family child care, in-home aide, day camp: no. Church- or school-attached centers are not dropped. Crisis and residential infant care: 0 in Hamilton County on the 4/22/2025 list.
+
+## Condo lots and apartment lots
+
+The parcel reading produces different buffers for physically identical buildings, depending on whether the property was condominium-ized. R.C. 5311.11 makes each condo unit a separate parcel. An apartment complex is a single parcel. A rental-to-condo conversion would change the buffer without any physical change to the building.
+
+The building-anchored reading is the only one that treats those two cases alike. That is some evidence it is the correct construction. We report parcel-to-parcel as primary because it matches published enforcement practice, and we report the building-anchored surface alongside it. No Ohio court has decided which is right.
 
 ## How we found each place
 
