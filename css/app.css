@@ -1,0 +1,290 @@
+/* Hamilton County home-distance lookup — screen styles */
+:root {
+  --ink: #1c1410;
+  --ink-soft: #3d322b;
+  --paper: #f6f0e8;
+  --paper-2: #efe6d8;
+  --line: #c9b8a4;
+  --rust: #7a2e22;
+  --rust-deep: #4a1c16;
+  --rust-wash: #f3e0d6;
+  --amber: #8a5a12;
+  --amber-wash: #f6ead0;
+  --btn: #1c1410;
+  --btn-text: #f6f0e8;
+  --focus: #7a2e22;
+  --map-h: 240px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { font-size: 18px; }
+body {
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.45;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+}
+.skip:focus {
+  left: 8px;
+  top: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 8px 12px;
+  z-index: 10;
+}
+
+.top {
+  padding: 12px 16px 0;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+.top p.kicker {
+  margin: 0 0 2px;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.top h1 {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+form.lookup {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 16px 8px;
+}
+form.lookup label {
+  display: block;
+  font-weight: 650;
+  margin-bottom: 6px;
+}
+form.lookup input[type="text"] {
+  width: 100%;
+  min-height: 52px;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 2px solid var(--ink);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 6px;
+}
+form.lookup button {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: 0;
+  border-radius: 6px;
+  background: var(--btn);
+  color: var(--btn-text);
+  cursor: pointer;
+}
+form.lookup button:focus,
+form.lookup input:focus,
+button:focus,
+a:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+form.lookup button:active { transform: translateY(1px); }
+
+.stay {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 4px 16px 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.privacy, .about, .foot, #out {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 16px;
+}
+.privacy {
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: 20px;
+}
+.privacy h2, .about h2, #out h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+.privacy p, .about p, .foot p { margin: 0 0 8px; }
+.privacy p:last-child, .about p:last-child { margin-bottom: 0; }
+
+.about { padding-top: 8px; }
+.about ul { margin: 0; padding-left: 1.2rem; }
+.about li { margin-bottom: 4px; }
+
+.foot {
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+  padding-bottom: 32px;
+}
+.foot a { color: var(--rust); font-weight: 650; }
+.foot a + a { margin-left: 1rem; }
+
+#out[hidden] { display: none; }
+
+.banner {
+  padding: 12px 14px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+.banner.rust {
+  background: var(--rust-deep);
+  color: #f6f0e8;
+}
+.banner.ink {
+  background: var(--ink);
+  color: #f6f0e8;
+}
+.banner.warn {
+  background: var(--amber-wash);
+  color: var(--ink);
+  border: 2px solid var(--amber);
+}
+.banner.plain {
+  background: var(--paper-2);
+  color: var(--ink);
+  border: 2px solid var(--line);
+}
+.banner h2 { margin: 0 0 6px; font-size: 1.15rem; color: inherit; }
+.banner p { margin: 0; }
+.asof { font-size: 0.88rem; opacity: 0.9; margin-top: 6px; }
+
+.addr-line { font-weight: 700; margin: 0 0 12px; }
+
+table.hits {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  margin: 0 0 14px;
+}
+table.hits th, table.hits td {
+  text-align: left;
+  vertical-align: top;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--line);
+}
+table.hits th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+
+.note, .limits {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin: 0 0 12px;
+}
+.note h3, .limits h3 { margin: 0 0 6px; font-size: 1rem; }
+.note p, .limits p, .limits li { margin: 0 0 8px; }
+.limits ul { margin: 0; padding-left: 1.15rem; }
+
+.map-wrap {
+  height: var(--map-h);
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  margin: 0 0 8px;
+  overflow: hidden;
+  background: #ddd;
+}
+.map-wrap .leaflet-container { height: 100%; width: 100%; background: #e8e4dc; }
+.legend {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+.legend span { display: inline-block; margin-right: 12px; }
+.swatch {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border: 2px solid var(--ink);
+  vertical-align: -1px;
+  margin-right: 4px;
+}
+.swatch.rust { background: #c46a4a; border-color: var(--rust); }
+.swatch.ink { background: transparent; border-color: var(--ink); }
+.swatch.wash { background: rgba(122,46,34,0.18); border-color: var(--rust); border-style: dashed; }
+
+.choices { display: flex; flex-direction: column; gap: 8px; }
+.choices button {
+  min-height: 52px;
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 1rem;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  color: var(--ink);
+  cursor: pointer;
+}
+.choices button strong { display: block; }
+
+.save {
+  width: 100%;
+  min-height: 52px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 8px 0 0;
+}
+
+.margin-box { padding: 10px 12px; border-radius: 6px; margin: 0 0 12px; font-weight: 650; }
+.margin-box.caution { background: var(--amber-wash); border: 2px solid var(--amber); }
+.margin-box.quiet { background: var(--paper-2); border: 1px solid var(--line); font-weight: 500; }
+
+.err { color: var(--rust-deep); font-weight: 650; }
+
+/* Findings */
+.page { max-width: 52rem; margin: 0 auto; padding: 16px; }
+.page h1 { font-size: 1.4rem; margin: 0 0 8px; }
+.page h2 { font-size: 1.1rem; margin: 20px 0 8px; }
+.interval {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  border-radius: 6px;
+}
+.interval dt { font-weight: 700; margin-top: 8px; }
+.interval dd { margin: 0 0 4px 0; }
+.scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 12px 0;
+  border: 1px solid var(--line);
+}
+table.muni { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 32rem; }
+table.muni th, table.muni td { padding: 8px 8px; text-align: left; border-bottom: 1px solid var(--line); }
+table.muni th { background: var(--ink); color: var(--paper); font-size: 0.75rem; text-transform: uppercase; }
+table.muni td.num, table.muni th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.muni tr.county td { font-weight: 700; background: var(--paper-2); }
+.fn { font-size: 0.88rem; color: var(--ink-soft); }
+
+@media (min-width: 640px) {
+  :root { --map-h: 320px; }
+  form.lookup button { width: auto; min-width: 10rem; display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

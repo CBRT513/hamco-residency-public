@@ -1,0 +1,197 @@
+{
+  "n": 12,
+  "note": "Reported, not added to the state floor. CAGIS has OWNER only; a lease was not invented.",
+  "venues": [
+    {
+      "district": "Reading Community City Schools",
+      "venue_name": "Veterans Memorial Stadium / Bemmes Field",
+      "sports": [
+        "football",
+        "soccer",
+        "track"
+      ],
+      "address": "1600 West Street, Reading, OH 45215",
+      "parcelids": [
+        "067100220005",
+        "067100220006",
+        "067100220007"
+      ],
+      "cagis_owner": "READING CITY OF THE",
+      "owner_kind": "city",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Three Rivers Local (Taylor)",
+      "venue_name": "Miami Township West Community Park",
+      "sports": [
+        "baseball",
+        "tennis"
+      ],
+      "address": "4063 E Miami River Road, Cleves, OH 45002",
+      "parcelids": [
+        "057001900016"
+      ],
+      "cagis_owner": "MIAMI TOWNSHIP TR BOARD OF THE",
+      "owner_kind": "township",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Madeira City Schools",
+      "venue_name": "Sellman Park",
+      "sports": [
+        "baseball"
+      ],
+      "address": "6700 Marvin Avenue (behind Madeira Middle School), Madeira, OH 45243",
+      "parcelids": [
+        "052500060086",
+        "052500060193"
+      ],
+      "cagis_owner": "MADEIRA CITY OF THE / MADEIRA CITY OF OHIO",
+      "owner_kind": "city",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Madeira City Schools",
+      "venue_name": "Madeira Swim & Tennis Club",
+      "sports": [
+        "tennis"
+      ],
+      "address": "6580 Miami Avenue, Madeira, OH 45243",
+      "parcelids": [
+        "052500060050"
+      ],
+      "cagis_owner": "MADEIRA SWIM CLUB INC",
+      "owner_kind": "private",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Mariemont City Schools",
+      "venue_name": "Stanton Field",
+      "sports": [
+        "softball",
+        "JH soccer"
+      ],
+      "address": "Corner of Elm Street and Stanton Avenue, Terrace Park, OH 45174",
+      "parcelids": [
+        "052100080029",
+        "052100070031",
+        "052100080018"
+      ],
+      "cagis_owner": "TERRACE PARK REC COMM INC / TERRACE PARK VILLAGE OF",
+      "owner_kind": "village / rec commission",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "St. Bernard-Elmwood Place; Roger Bacon (3301.07 nonpublic)",
+      "venue_name": "Ross Park",
+      "sports": [
+        "baseball",
+        "softball",
+        "soccer",
+        "tennis (Roger Bacon)"
+      ],
+      "address": "Tower Avenue / Bank Avenue / Ross Avenue, St. Bernard, OH 45217 (MVC also uses 5198 City Park Drive / 500 Tennis Lane)",
+      "parcelids": [
+        "058200070002",
+        "058200100006",
+        "058200100007",
+        "058200040018"
+      ],
+      "cagis_owner": "ST BERNARD CITY OF THE",
+      "owner_kind": "city",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Roger Bacon (3301.07 nonpublic)",
+      "venue_name": "Vine Street Park / Church Street Park",
+      "sports": [
+        "softball"
+      ],
+      "address": "4700 Vine Street (Church Street Park, next to St. Clement), St. Bernard, OH 45217",
+      "parcelids": [
+        "058200120009"
+      ],
+      "cagis_owner": "ST BERNARD CITY OF THE",
+      "owner_kind": "city",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Mt. Healthy City Schools",
+      "venue_name": "Adams Road baseball / softball fields",
+      "sports": [
+        "baseball",
+        "softball"
+      ],
+      "address": "2046 Adams Road, Cincinnati, OH 45231",
+      "parcelids": [
+        "059300010099"
+      ],
+      "cagis_owner": "MT HEALTHY CITY OF THE",
+      "owner_kind": "city",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Norwood City Schools",
+      "venue_name": "Upper Millcrest Park",
+      "sports": [
+        "baseball"
+      ],
+      "address": "1700/1702 Mills Avenue, Norwood, OH 45212",
+      "parcelids": [
+        "065100490336",
+        "065100490335",
+        "065100490337"
+      ],
+      "cagis_owner": "NORWOOD CITY OF THE / NORWOOD CITY OF",
+      "owner_kind": "city",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Reading Community City Schools",
+      "venue_name": "Blue Ash YMCA tennis courts",
+      "sports": [
+        "tennis"
+      ],
+      "address": "5000 YMCA Drive, Blue Ash, OH 45242",
+      "parcelids": [
+        "061200300381",
+        "061200300382",
+        "061200300182"
+      ],
+      "cagis_owner": "YOUNG MENS CHRISTIAN ASSOCIATION OF CINCINNATI / ASSOC OF GREATER CINCINNATI",
+      "owner_kind": "private (YMCA)",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Princeton City Schools",
+      "venue_name": "Evendale Recreation Center Field 5",
+      "sports": [
+        "JV softball"
+      ],
+      "address": "10500 Reading Road, Evendale, OH 45241",
+      "parcelids": [
+        "061100300156",
+        "061100300045",
+        "061100300091"
+      ],
+      "cagis_owner": "EVENDALE OHIO VILLAGE OF THE",
+      "owner_kind": "village",
+      "confidence": "home_listed"
+    },
+    {
+      "district": "Archbishop McNicholas (3301.07 nonpublic)",
+      "venue_name": "Lindner Family Tennis Center at Lunken Playfield",
+      "sports": [
+        "tennis"
+      ],
+      "address": "4750 Playfield Lane / 4744 Playfield Lane, Cincinnati, OH 45226",
+      "parcelids": [
+        "001500030059",
+        "001500030060"
+      ],
+      "cagis_owner": "CINCINNATI CITY OF",
+      "owner_kind": "city",
+      "confidence": "home_listed"
+    }
+  ]
+}

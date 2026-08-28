@@ -1,0 +1,34 @@
+@page { size: letter; margin: 0.6in; }
+
+@media print {
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+    line-height: 1.35;
+  }
+  .skip, form.lookup, .stay, .privacy, .about, .foot,
+  .save, .choices, .map-wrap, .legend { display: none !important; }
+  a { color: #000; text-decoration: none; }
+  .banner, .note, .limits, .margin-box {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1.5pt solid #000 !important;
+  }
+  table.hits th, table.hits td, table.muni th, table.muni td {
+    border-bottom: 0.7pt solid #000;
+    color: #000;
+    background: #fff !important;
+  }
+  table.muni th { border-bottom: 1.4pt solid #000; }
+  .swatch { border-color: #000 !important; background: #fff !important; }
+  .page, .top, #out { max-width: none; padding: 0; }
+}
+
+/* Standalone determination page uses these too */
+.print-sheet body, body.print-sheet {
+  background: #fff;
+  color: #000;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11pt;
+}

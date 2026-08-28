@@ -1,0 +1,49 @@
+{
+  "n_addresses": 389718,
+  "n_shards": 75,
+  "n_parcel_shards": 61,
+  "n_facilities": 1074,
+  "n_untested": 2180,
+  "largest_address_shard": {
+    "id": "45231",
+    "bytes": 2061890,
+    "n": 17774
+  },
+  "largest_parcel_shard": {
+    "id": "45231",
+    "bytes": 3573906,
+    "n": 15877
+  },
+  "largest_shard_bytes": {
+    "id": "45231",
+    "bytes": 3573906,
+    "n": 15877
+  },
+  "hopkins_1900": {
+    "resolved": true,
+    "n_hits": 1,
+    "record": {
+      "a": "1900 HOPKINS AVE",
+      "c": "NORWOOD",
+      "z": "45212",
+      "pid": "065100520058",
+      "lon": -84.46421,
+      "lat": 39.155689,
+      "parcel_geom": true
+    }
+  },
+  "sample_4064_e_miami_river_rd": {
+    "present": true,
+    "n_hits": 1,
+    "record": {
+      "a": "4064 E MIAMI RIVER RD",
+      "c": "MIAMI TOWNSHIP",
+      "z": "45002",
+      "pid": "057001900070",
+      "lon": -84.747558,
+      "lat": 39.173962
+    }
+  },
+  "sandbox_commit": "39bdb20cd98c3e83da2323dca49276c5a8c00e17",
+  "sandbox_unmodified": true
+}

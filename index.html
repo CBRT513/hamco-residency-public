@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Hamilton County home-distance lookup</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="print.css">
+  <style>@page { size: letter; margin: 0.6in; }</style>
+</head>
+<body>
+  <a class="skip" href="#q">Skip to address</a>
+
+  <header class="top">
+    <p class="kicker">Hamilton County, Ohio</p>
+    <h1>Home distance lookup</h1>
+  </header>
+
+  <form class="lookup" id="lookup" action="#" method="post">
+    <label for="q">Address</label>
+    <input id="q" type="text" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="1900 Hopkins Ave, Norwood">
+    <button type="submit">Look up</button>
+  </form>
+  <p class="stay">Search stays on your phone. We do not get a copy.</p>
+
+  <div id="out" hidden aria-live="polite"></div>
+
+  <aside class="privacy">
+    <h2>Your search stays with you</h2>
+    <p>People using this page can be in a vulnerable spot. A list of who searched which address could be demanded in court, stolen, or used to harass someone.</p>
+    <p>This site has no server that could keep that list. After the page loads, your phone only fetches map files from this same site. We do not send your address to a mapping company. We do not use cookies. We do not keep a search history.</p>
+  </aside>
+
+  <section class="about">
+    <h2>What this checks</h2>
+    <p>Ohio law bars some people from living within 1,000 feet of a school or licensed child care. A few cities add parks, pools, libraries, or rec centers.</p>
+    <p>We measure lot line to lot line, not door to door. Type an address in Hamilton County.</p>
+    <ul>
+      <li>You, a family member, a landlord, or a caseworker can use this.</li>
+      <li>It is a map check, not a court order.</li>
+      <li>A lawyer or the sheriff can still reach a different result.</li>
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <p><a href="findings.html">County findings</a> <a href="METHOD.md">How we measured</a></p>
+    <p>Data current as of 2026-08-25. Not official eSORN.</p>
+  </footer>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

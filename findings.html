@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Findings — Hamilton County home-distance map</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="print.css">
+  <style>@page { size: letter; margin: 0.6in; }</style>
+</head>
+<body>
+  <div class="page">
+    <p class="kicker">Hamilton County, Ohio · data as of 2026-08-25</p>
+    <h1>How much of the county sits inside 1,000 feet</h1>
+    <p>We counted 305,868 homes. A home is an address point on a housing lot.</p>
+    <p>State law alone puts <strong>38.58%</strong> of those homes inside 1,000 feet of a school or licensed child care.</p>
+    <p>State law plus city rules in Cincinnati, Norwood, Reading, Golf Manor, and Evendale puts <strong>40.71%</strong> inside 1,000 feet.</p>
+
+    <h2>The leftover school-owned lots</h2>
+    <p>Ohio also counts a school-owned lot if instruction, sports, or training actually happen there. We could confirm some of those lots. 2,180 other school-owned lots were not fully checked. 12 rented school sites were listed but not added.</p>
+    <dl class="interval">
+      <dt>38.58% confirmed</dt>
+      <dd>Homes inside 1,000 feet of the places we fully mapped under state law.</dd>
+      <dt>88.29% ceiling</dt>
+      <dd>If every leftover school-owned lot counted, this is the highest share we would publish. Overlapping zones make this high. It is not our best reading.</dd>
+      <dt>44.61% best estimate</dt>
+      <dd>Our best reading of those leftover lots, using unique homes, not stacked overlapping zones. Do not use 54.18%. That older figure counted the same homes more than once.</dd>
+    </dl>
+
+    <h2>By city and township</h2>
+    <p>Shares use the same home count for that place. City rules only change the second share in Cincinnati, Norwood, Reading, Golf Manor, and Evendale.</p>
+    <div class="scroll">
+      <table class="muni">
+        <thead>
+          <tr>
+            <th>Place</th>
+            <th class="num">Homes</th>
+            <th class="num">Inside 1,000 ft · state</th>
+            <th class="num">Inside 1,000 ft · state + city</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr class="county"><td>Hamilton County</td><td class="num">305,868</td><td class="num">38.58%</td><td class="num">40.71%</td></tr>
+<tr class="row"><td>Addyston</td><td class="num">429</td><td class="num">0.00%</td><td class="num">0.00%</td></tr>
+<tr class="row"><td>Amberley Village</td><td class="num">1,464</td><td class="num">7.10%</td><td class="num">7.10%</td></tr>
+<tr class="row"><td>Anderson Township</td><td class="num">16,709</td><td class="num">25.45%</td><td class="num">25.45%</td></tr>
+<tr class="row"><td>Arlington Heights</td><td class="num">276</td><td class="num">39.13%</td><td class="num">39.13%</td></tr>
+<tr class="row"><td>Blue Ash</td><td class="num">5,003</td><td class="num">40.48%</td><td class="num">40.48%</td></tr>
+<tr class="row"><td>Cheviot</td><td class="num">3,266</td><td class="num">46.30%</td><td class="num">46.30%</td></tr>
+<tr class="row"><td>Cincinnati</td><td class="num">106,606</td><td class="num">49.99%</td><td class="num">52.73%</td></tr>
+<tr class="row"><td>Cleves</td><td class="num">1,163</td><td class="num">17.46%</td><td class="num">17.46%</td></tr>
+<tr class="row"><td>Colerain Township</td><td class="num">23,968</td><td class="num">33.88%</td><td class="num">33.88%</td></tr>
+<tr class="row"><td>Columbia Township</td><td class="num">1,701</td><td class="num">46.74%</td><td class="num">46.74%</td></tr>
+<tr class="row"><td>Crosby Township</td><td class="num">1,862</td><td class="num">0.43%</td><td class="num">0.43%</td></tr>
+<tr class="row"><td>Deer Park</td><td class="num">2,271</td><td class="num">52.36%</td><td class="num">52.36%</td></tr>
+<tr class="row"><td>Delhi Township</td><td class="num">10,322</td><td class="num">34.23%</td><td class="num">34.23%</td></tr>
+<tr class="row"><td>Elmwood Place</td><td class="num">730</td><td class="num">56.16%</td><td class="num">56.16%</td></tr>
+<tr class="row"><td>Evendale</td><td class="num">1,103</td><td class="num">28.38%</td><td class="num">74.62%</td></tr>
+<tr class="row"><td>Fairfax</td><td class="num">801</td><td class="num">42.70%</td><td class="num">42.70%</td></tr>
+<tr class="row"><td>Forest Park</td><td class="num">5,820</td><td class="num">46.72%</td><td class="num">46.72%</td></tr>
+<tr class="row"><td>Glendale</td><td class="num">1,068</td><td class="num">45.97%</td><td class="num">45.97%</td></tr>
+<tr class="row"><td>Golf Manor</td><td class="num">1,300</td><td class="num">23.00%</td><td class="num">43.31%</td></tr>
+<tr class="row"><td>Green Township</td><td class="num">25,246</td><td class="num">28.86%</td><td class="num">28.86%</td></tr>
+<tr class="row"><td>Greenhills</td><td class="num">1,561</td><td class="num">40.55%</td><td class="num">40.55%</td></tr>
+<tr class="row"><td>Harrison</td><td class="num">4,975</td><td class="num">37.99%</td><td class="num">37.99%</td></tr>
+<tr class="row"><td>Harrison Township</td><td class="num">1,884</td><td class="num">21.44%</td><td class="num">21.44%</td></tr>
+<tr class="row"><td>Indian Hill</td><td class="num">2,362</td><td class="num">17.19%</td><td class="num">17.19%</td></tr>
+<tr class="row"><td>Lincoln Heights</td><td class="num">1,224</td><td class="num">45.26%</td><td class="num">45.26%</td></tr>
+<tr class="row"><td>Lockland</td><td class="num">1,238</td><td class="num">38.69%</td><td class="num">38.69%</td></tr>
+<tr class="row"><td>Loveland</td><td class="num">3,217</td><td class="num">32.83%</td><td class="num">32.83%</td></tr>
+<tr class="row"><td>Madeira</td><td class="num">3,501</td><td class="num">27.56%</td><td class="num">27.56%</td></tr>
+<tr class="row"><td>Mariemont</td><td class="num">1,396</td><td class="num">56.52%</td><td class="num">56.52%</td></tr>
+<tr class="row"><td>Miami Township</td><td class="num">4,950</td><td class="num">0.06%</td><td class="num">0.06%</td></tr>
+<tr class="row"><td>Milford *</td><td class="num">15</td><td class="num">0.00%</td><td class="num">0.00%</td></tr>
+<tr class="row"><td>Montgomery</td><td class="num">3,988</td><td class="num">25.60%</td><td class="num">25.60%</td></tr>
+<tr class="row"><td>Mount Healthy</td><td class="num">2,106</td><td class="num">62.92%</td><td class="num">62.92%</td></tr>
+<tr class="row"><td>Newtown</td><td class="num">1,069</td><td class="num">31.81%</td><td class="num">31.81%</td></tr>
+<tr class="row"><td>North Bend</td><td class="num">417</td><td class="num">15.11%</td><td class="num">15.11%</td></tr>
+<tr class="row"><td>North College Hill</td><td class="num">3,397</td><td class="num">55.08%</td><td class="num">55.08%</td></tr>
+<tr class="row"><td>Norwood</td><td class="num">6,352</td><td class="num">43.53%</td><td class="num">72.80%</td></tr>
+<tr class="row"><td>Reading</td><td class="num">3,596</td><td class="num">48.42%</td><td class="num">74.67%</td></tr>
+<tr class="row"><td>Saint Bernard</td><td class="num">1,633</td><td class="num">51.62%</td><td class="num">51.62%</td></tr>
+<tr class="row"><td>Sharonville</td><td class="num">3,705</td><td class="num">28.10%</td><td class="num">28.10%</td></tr>
+<tr class="row"><td>Silverton</td><td class="num">1,777</td><td class="num">36.58%</td><td class="num">36.58%</td></tr>
+<tr class="row"><td>Springdale</td><td class="num">3,685</td><td class="num">26.95%</td><td class="num">26.95%</td></tr>
+<tr class="row"><td>Springfield Township</td><td class="num">15,066</td><td class="num">30.94%</td><td class="num">30.94%</td></tr>
+<tr class="row"><td>Sycamore Township</td><td class="num">8,058</td><td class="num">37.89%</td><td class="num">37.89%</td></tr>
+<tr class="row"><td>Symmes Township</td><td class="num">5,573</td><td class="num">26.75%</td><td class="num">26.75%</td></tr>
+<tr class="row"><td>Terrace Park</td><td class="num">839</td><td class="num">21.57%</td><td class="num">21.57%</td></tr>
+<tr class="row"><td>Whitewater Township</td><td class="num">2,933</td><td class="num">0.07%</td><td class="num">0.07%</td></tr>
+<tr class="row"><td>Woodlawn</td><td class="num">1,168</td><td class="num">16.01%</td><td class="num">16.01%</td></tr>
+<tr class="row"><td>Wyoming</td><td class="num">3,073</td><td class="num">51.64%</td><td class="num">51.64%</td></tr>
+<tr class="row"><td>Unincorporated</td><td class="num">2</td><td class="num">0.00%</td><td class="num">0.00%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fn">* Milford: 15 homes. That is the sliver of Milford that sits in Hamilton County. The rest of Milford is in Clermont County and is not in this table. Fairfield is omitted because this extract has 0 homes there.</p>
+
+    <h2>How we measured</h2>
+    <p>Each protected place starts at its lot, not a map pin. We grow a 1,000-foot zone from that lot line. We then ask which homes sit inside that zone.</p>
+    <p>Child care counts only if the state lists it as an open center or preschool. In-home aides, type A/B family homes, and day camps are out. School-age programs are flagged and are not in the main number.</p>
+    <p>City rules add parks, pools, libraries, or rec centers in five places. Those zones stop at that city’s line.</p>
+    <p>This page is a snapshot. A new school or child care can change a share. Full steps are in <a href="METHOD.md">METHOD.md</a>.</p>
+
+    <p class="foot"><a href="index.html">Back to lookup</a> <a href="METHOD.md">METHOD.md</a></p>
+  </div>
+</body>
+</html>
