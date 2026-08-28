@@ -5,6 +5,8 @@
   var FT_PER_DEG_LAT = 364567.2;
   var LIMIT_FT = 1000;
   var SITE_PLACEHOLDER = "https://YOUR-SITE.example";
+  var GATE_KEY = "hamco-gate-ok";
+  var gateOkMemory = false;
 
   var SUFFIX = {
     AVENUE: "AVE", AVE: "AVE",
@@ -409,6 +411,37 @@
     return "Data current as of " + rel;
   }
 
+  function readGate() {
+    if (gateOkMemory) return true;
+    try {
+      return window.localStorage.getItem(GATE_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function writeGate() {
+    gateOkMemory = true;
+    try {
+      window.localStorage.setItem(GATE_KEY, "1");
+    } catch (e) {}
+  }
+
+  function resultLineHTML() {
+    return (
+      '<p class="result-line">Not a legal clearance. This map doesn\'t know your tier, conviction date, or move-in date — some restrictions shown may not apply to you. <a href="disclaimer.html">What this means</a></p>'
+    );
+  }
+
+  function shortFormHTML() {
+    return (
+      '<section class="short-form">' +
+        "<p>This map does not know who you are. It applies every restriction to every address, regardless of your tier, when you were convicted, when you bought or leased, or how you were classified. Several restrictions here do not apply to everyone. Where the law is unsettled, we show the stricter reading.</p>" +
+        "<p>That means this map may show an address as restricted when it is not restricted for you. If an address matters to you, that is a question for a lawyer — not for this map.</p>" +
+      "</section>"
+    );
+  }
+
   function limitsHTML() {
     var n = (boot.manifest && boot.manifest.n_untested_r2) || 2180;
     var lease = (boot.manifest && boot.manifest.n_lease_venues) || 12;
@@ -591,8 +624,11 @@
         " protected location" + (model.blockers.length === 1 ? "" : "s") + ".</h1>";
       body += "<p><strong>" + esc(model.label) + "</strong></p>";
       body += "<p>" + asOf() + "</p>";
+      body += "<p>Not a legal clearance. This map doesn't know your tier, conviction date, or move-in date — some restrictions shown may not apply to you.</p>";
       body += "<div class=\"tbl\"><table><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>" +
         rows + "</tbody></table></div>";
+      body += "<p>This map does not know who you are. It applies every restriction to every address, regardless of your tier, when you were convicted, when you bought or leased, or how you were classified. Several restrictions here do not apply to everyone. Where the law is unsettled, we show the stricter reading.</p>";
+      body += "<p>That means this map may show an address as restricted when it is not restricted for you. If an address matters to you, that is a question for a lawyer — not for this map.</p>";
       body += "<p>Ohio law treats the whole lot as the home (R.C. 2950.01). Distance is from one lot line to the other.</p>";
       body += "<p>Hyle v. Porter (2008): this rule is not retroactive if you bought the home and the offense happened before July 31, 2003.</p>";
       if (fold(model.city) === "CINCINNATI") {
@@ -602,9 +638,12 @@
       body += "<h1>We did not find a protected location within 1,000 feet of this property.</h1>";
       body += "<p><strong>" + esc(model.label) + "</strong></p>";
       body += "<p>" + asOf() + "</p>";
+      body += "<p>Not a legal clearance. This map doesn't know your tier, conviction date, or move-in date — some restrictions shown may not apply to you.</p>";
       if (model.nearest) {
         body += "<p>Nearest protected location: " + esc(model.nearest.name) + " — " + fmtFt(model.nearest.dist) + ".</p>";
       }
+      body += "<p>This map does not know who you are. It applies every restriction to every address, regardless of your tier, when you were convicted, when you bought or leased, or how you were classified. Several restrictions here do not apply to everyone. Where the law is unsettled, we show the stricter reading.</p>";
+      body += "<p>That means this map may show an address as restricted when it is not restricted for you. If an address matters to you, that is a question for a lawyer — not for this map.</p>";
       body += "<p>This is not a court sign-off. A prosecutor, sheriff, or judge can still reach a different result.</p>";
       if (model.nearUntested) {
         body += "<p>School-district lot we have not fully checked: " +
@@ -659,9 +698,11 @@
         " protected location" + (n === 1 ? "" : "s") + ".</h2>" +
         '<p class="asof">' + asOf() + "</p>" +
       "</div>" +
+      resultLineHTML() +
       '<p class="addr-line">' + esc(model.label) + "</p>" +
       '<div class="hits-wrap"><table class="hits"><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>' +
       rows + "</tbody></table></div>" +
+      shortFormHTML() +
       lineHTML() + hyleHTML() + cincyHTML(model.city) +
       mapHTML("Lot outlines and the 1,000-foot zone") +
       '<p class="legend"><span><i class="swatch ink"></i>This lot</span>' +
@@ -696,10 +737,12 @@
         "<h2>We did not find a protected location within 1,000 feet of this property.</h2>" +
         '<p class="asof">' + asOf() + "</p>" +
       "</div>" +
+      resultLineHTML() +
       '<p class="addr-line">' + esc(model.label) + "</p>" +
       "<p>" + near + "</p>" +
       (bandText ? '<p class="margin-box ' + band + '">' + bandText + "</p>" : "") +
       un +
+      shortFormHTML() +
       notFoundLegalHTML() +
       mapHTML("This lot and the nearest protected lot") +
       '<p class="legend"><span><i class="swatch ink"></i>This lot</span>' +
@@ -891,6 +934,48 @@
     });
   }
 
+  var gateBound = false;
+
+  function openGate() {
+    var dlg = $("gate");
+    if (!dlg) return;
+    if (typeof dlg.showModal === "function") {
+      if (!dlg.open) dlg.showModal();
+    } else {
+      dlg.setAttribute("open", "");
+    }
+  }
+
+  function bindGate() {
+    var dlg = $("gate");
+    var box = $("gate-ok");
+    var go = $("gate-go");
+    if (!dlg || !box || !go) return true;
+
+    if (!gateBound) {
+      gateBound = true;
+      box.addEventListener("change", function () {
+        go.disabled = !box.checked;
+      });
+      go.disabled = !box.checked;
+      dlg.addEventListener("cancel", function (ev) {
+        ev.preventDefault();
+      });
+      go.addEventListener("click", function () {
+        if (!box.checked) return;
+        writeGate();
+        if (typeof dlg.close === "function") dlg.close();
+        else dlg.removeAttribute("open");
+        var q = $("q");
+        if (q) q.focus();
+      });
+    }
+
+    if (readGate()) return true;
+    openGate();
+    return false;
+  }
+
   function start() {
     Promise.all([
       getJSON("data/manifest.json"),
@@ -906,10 +991,16 @@
       /* page still accepts a search; it will fail softly */
     });
 
+    bindGate();
+
     var form = $("lookup");
     if (form) {
       form.addEventListener("submit", function (ev) {
         ev.preventDefault();
+        if (!readGate()) {
+          bindGate();
+          return;
+        }
         search(($("q") && $("q").value) || "");
       });
     }
