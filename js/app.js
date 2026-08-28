@@ -421,6 +421,7 @@
           "<li>School-age child care is not in the main test.</li>" +
           "<li>Child care in Kentucky or Indiana is not on this map.</li>" +
           "<li>A new school or child care can change this answer.</li>" +
+          "<li>Cincinnati, Norwood, Reading, Golf Manor, and Evendale enforce extra city rules themselves.</li>" +
         "</ul>" +
       "</section>"
     );
@@ -481,27 +482,26 @@
     wipeMap();
     var el = $("map");
     if (!el || typeof L === "undefined") return;
-    mapObj = L.map(el, { zoomControl: true, attributionControl: true });
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-      attribution: "&copy; OpenStreetMap &copy; CARTO",
-      subdomains: "abcd",
-      maxZoom: 19
-    }).addTo(mapObj);
+    mapObj = L.map(el, { zoomControl: true, attributionControl: false });
 
     var layers = [];
     var lat0 = model.lat0;
     var sub = model.subjectGeom;
-    var rings = ringsOf(sub);
-    if (rings[0]) {
-      var buf = bufferRing(rings[0], LIMIT_FT, lat0);
-      var bufL = L.polygon(buf.map(function (p) { return [p[1], p[0]]; }), {
+    function addBuffer(geom) {
+      var rr = ringsOf(geom);
+      if (!rr[0]) return;
+      var buf = bufferRing(rr[0], LIMIT_FT, lat0);
+      layers.push(L.polygon(buf.map(function (p) { return [p[1], p[0]]; }), {
         color: "#7a2e22",
         weight: 1,
         dashArray: "5,5",
         fillColor: "#7a2e22",
-        fillOpacity: 0.12
-      }).addTo(mapObj);
-      layers.push(bufL);
+        fillOpacity: 0.08
+      }).addTo(mapObj));
+    }
+    (model.blockers || []).forEach(function (b) { addBuffer(b.geometry); });
+    if (model.nearest && model.nearest.geometry && !(model.blockers && model.blockers.length)) {
+      addBuffer(model.nearest.geometry);
     }
 
     function addPoly(geom, opt) {
