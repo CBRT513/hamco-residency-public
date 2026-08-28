@@ -18,14 +18,21 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-html { font-size: 18px; }
+html {
+  font-size: 18px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 body {
   font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--paper);
   color: var(--ink);
   line-height: 1.45;
   min-height: 100vh;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
 }
 
 .skip {
@@ -173,6 +180,7 @@ form.lookup button:active { transform: translateY(1px); }
 
 table.hits {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   font-size: 0.92rem;
   margin: 0 0 14px;
@@ -182,6 +190,7 @@ table.hits th, table.hits td {
   vertical-align: top;
   padding: 8px 6px;
   border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
 }
 table.hits th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
 
@@ -279,6 +288,16 @@ table.muni th { background: var(--ink); color: var(--paper); font-size: 0.75rem;
 table.muni td.num, table.muni th.num { text-align: right; font-variant-numeric: tabular-nums; }
 table.muni tr.county td { font-weight: 700; background: var(--paper-2); }
 .fn { font-size: 0.88rem; color: var(--ink-soft); }
+
+@media (max-width: 639px) {
+  table.hits { table-layout: fixed; }
+  .leaflet-touch .leaflet-bar a,
+  .leaflet-bar a {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+  }
+}
 
 @media (min-width: 640px) {
   :root { --map-h: 320px; }

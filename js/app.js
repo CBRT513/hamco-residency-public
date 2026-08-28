@@ -609,8 +609,10 @@
       " rented school sites; Kentucky or Indiana child care; a new license can change this answer.</p>";
     body += "<p>Lot id " + esc(model.pid) + ". Printed " + day + " ET. Source pin " + esc(commit) + ".</p>";
     body += "<p>Site: " + esc(url) + "</p>";
-    return "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Determination " +
-      esc(day) + "</title><style>@page{size:letter;margin:0.6in}body{font:11pt Georgia,serif;color:#000;background:#fff}h1{font-size:14pt}table{width:100%;border-collapse:collapse}th,td{border-bottom:0.7pt solid #000;text-align:left;padding:4pt}svg{max-width:100%}</style></head><body>" +
+    return "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\">" +
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">" +
+      "<title>Determination " +
+      esc(day) + "</title><style>@page{size:letter;margin:0.6in}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{font:11pt Georgia,serif;color:#000;background:#fff;margin:12px}h1{font-size:14pt}table{width:100%;max-width:100%;border-collapse:collapse;table-layout:fixed}th,td{border-bottom:0.7pt solid #000;text-align:left;padding:4pt;overflow-wrap:anywhere}svg{max-width:100%}</style></head><body>" +
       body + "</body></html>";
   }
 
