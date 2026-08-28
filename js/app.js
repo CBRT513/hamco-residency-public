@@ -581,8 +581,8 @@
         " protected location" + (model.blockers.length === 1 ? "" : "s") + ".</h1>";
       body += "<p><strong>" + esc(model.label) + "</strong></p>";
       body += "<p>" + asOf() + "</p>";
-      body += "<table><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>" +
-        rows + "</tbody></table>";
+      body += "<div class=\"tbl\"><table><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>" +
+        rows + "</tbody></table></div>";
       body += "<p>Ohio law treats the whole lot as the home (R.C. 2950.01). Distance is from one lot line to the other.</p>";
       body += "<p>Hyle v. Porter (2008): this rule is not retroactive if you bought the home and the offense happened before July 31, 2003.</p>";
       if (fold(model.city) === "CINCINNATI") {
@@ -609,8 +609,10 @@
       " rented school sites; Kentucky or Indiana child care; a new license can change this answer.</p>";
     body += "<p>Lot id " + esc(model.pid) + ". Printed " + day + " ET. Source pin " + esc(commit) + ".</p>";
     body += "<p>Site: " + esc(url) + "</p>";
-    return "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Determination " +
-      esc(day) + "</title><style>@page{size:letter;margin:0.6in}body{font:11pt Georgia,serif;color:#000;background:#fff}h1{font-size:14pt}table{width:100%;border-collapse:collapse}th,td{border-bottom:0.7pt solid #000;text-align:left;padding:4pt}svg{max-width:100%}</style></head><body>" +
+    return "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\">" +
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">" +
+      "<title>Determination " +
+      esc(day) + "</title><style>@page{size:letter;margin:0.6in}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{font:11pt Georgia,serif;color:#000;background:#fff;margin:12px}h1{font-size:14pt}.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse}th,td{border-bottom:0.7pt solid #000;text-align:left;padding:4pt;overflow-wrap:break-word}svg{max-width:100%}</style></head><body>" +
       body + "</body></html>";
   }
 
@@ -648,8 +650,8 @@
         '<p class="asof">' + asOf() + "</p>" +
       "</div>" +
       '<p class="addr-line">' + esc(model.label) + "</p>" +
-      '<table class="hits"><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>' +
-      rows + "</tbody></table>" +
+      '<div class="hits-wrap"><table class="hits"><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>' +
+      rows + "</tbody></table></div>" +
       lineHTML() + hyleHTML() + cincyHTML(model.city) +
       '<div class="map-wrap" id="map" role="img" aria-label="Lot outlines and the 1,000-foot zone"></div>' +
       '<p class="legend"><span><i class="swatch ink"></i>This lot</span>' +
