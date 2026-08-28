@@ -466,7 +466,10 @@
 
   function mapHTML(aria) {
     return (
-      '<p class="map-note">This drawing is the lots and the 1,000-foot zone. We leave streets off so looking up an address does not send that spot to a mapping company.</p>' +
+      '<div class="map-note">' +
+        "<h3>Why you aren't seeing an actual map:</h3>" +
+        "<p>This drawing is the lots and the 1,000-foot zone. Streets are left off so looking up an address does not send that spot to a mapping company.</p>" +
+      "</div>" +
       '<div class="map-wrap" id="map" role="img" aria-label="' + esc(aria) + '"></div>'
     );
   }
