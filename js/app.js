@@ -464,6 +464,13 @@
     );
   }
 
+  function mapHTML(aria) {
+    return (
+      '<p class="map-note">This drawing is the lots and the 1,000-foot zone. We leave streets off so looking up an address does not send that spot to a mapping company.</p>' +
+      '<div class="map-wrap" id="map" role="img" aria-label="' + esc(aria) + '"></div>'
+    );
+  }
+
   function showOut(html) {
     var box = $("out");
     box.hidden = false;
@@ -653,7 +660,7 @@
       '<div class="hits-wrap"><table class="hits"><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>' +
       rows + "</tbody></table></div>" +
       lineHTML() + hyleHTML() + cincyHTML(model.city) +
-      '<div class="map-wrap" id="map" role="img" aria-label="Lot outlines and the 1,000-foot zone"></div>' +
+      mapHTML("Lot outlines and the 1,000-foot zone") +
       '<p class="legend"><span><i class="swatch ink"></i>This lot</span>' +
       '<span><i class="swatch rust"></i>Protected lot</span>' +
       '<span><i class="swatch wash"></i>1,000-foot zone</span>' +
@@ -691,7 +698,7 @@
       (bandText ? '<p class="margin-box ' + band + '">' + bandText + "</p>" : "") +
       un +
       notFoundLegalHTML() +
-      '<div class="map-wrap" id="map" role="img" aria-label="This lot and the nearest protected lot"></div>' +
+      mapHTML("This lot and the nearest protected lot") +
       '<p class="legend"><span><i class="swatch ink"></i>This lot</span>' +
       '<span><i class="swatch rust"></i>Nearest protected lot</span>' +
       '<span><i class="swatch wash"></i>1,000-foot zone</span></p>' +

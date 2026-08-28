@@ -8,7 +8,7 @@
     line-height: 1.35;
   }
   .skip, form.lookup, .stay, .privacy, .about, .foot,
-  .save, .choices, .map-wrap, .legend { display: none !important; }
+  .save, .choices, .map-note, .map-wrap, .legend { display: none !important; }
   a { color: #000; text-decoration: none; }
   .banner, .note, .limits, .margin-box {
     background: #fff !important;
