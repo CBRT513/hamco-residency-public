@@ -717,7 +717,8 @@
         props = f.properties || {};
         if (!typeCounts(props.type)) continue;
         if (!lawFits(props.law, row.c)) continue;
-        if (!bboxHit(subB, bboxOf(f.geometry))) continue;
+        var nearby = bboxHit(subB, bboxOf(f.geometry));
+        if (!nearby && nearest && nearest.dist <= 4000) continue;
         d = geomDist(subjectGeom, f.geometry, lat0);
         var rec = {
           name: props.name || "Protected place",
