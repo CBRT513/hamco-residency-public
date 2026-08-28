@@ -18,6 +18,21 @@
     <h1>Home distance lookup</h1>
   </header>
 
+  <dialog class="gate" id="gate" aria-labelledby="gate-title">
+    <h2 id="gate-title">Before you use this</h2>
+    <p>This is not a legal clearance. No office in Ohio issues one.</p>
+    <p>This map doesn't know your tier, your conviction date, or when you moved in — and several restrictions shown here only apply to some people. On a few questions no court has ever ruled, and we use the stricter reading.</p>
+    <p>We deliberately err toward "restricted." Being wrongly told you're restricted costs you a housing option. Being wrongly told you're clear can cost you your home.</p>
+    <label class="gate-check" for="gate-ok">
+      <input id="gate-ok" type="checkbox">
+      <span>I understand this is a research tool, not legal advice, and not an approval.</span>
+    </label>
+    <div class="gate-actions">
+      <a href="disclaimer.html">Full terms and methodology</a>
+      <button type="button" id="gate-go" disabled>Continue</button>
+    </div>
+  </dialog>
+
   <form class="lookup" id="lookup" action="#" method="post">
     <label for="q">Address</label>
     <input id="q" type="text" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="1900 Hopkins Ave, Norwood">
@@ -30,7 +45,7 @@
   <aside class="privacy">
     <h2>Your search stays with you</h2>
     <p>People using this page can be in a vulnerable spot. A list of who searched which address could be demanded in court, stolen, or used to harass someone.</p>
-    <p>This site has no server that could keep that list. After the page loads, your phone only fetches map files from this same site. We do not send your address to a mapping company. We do not use cookies. We do not keep a search history.</p>
+    <p>This site has no server that could keep that list. After the page loads, your phone only fetches map files from this same site. We do not send your address to a mapping company. We do not use cookies. We do not keep a search history. This browser can remember that you checked the one-time terms box. It does not store addresses.</p>
   </aside>
 
   <section class="about">
@@ -45,7 +60,7 @@
   </section>
 
   <footer class="foot">
-    <p><a href="findings.html">County findings</a> <a href="METHOD.md">How we measured</a></p>
+    <p><a href="findings.html">County findings</a> <a href="disclaimer.html">Full terms</a> <a href="METHOD.md">How we measured</a></p>
     <p>Data current as of 2026-08-25. Not official eSORN.</p>
   </footer>
 

@@ -23,9 +23,56 @@ Inclusion is by license type, never zoning. Licensed child care center and presc
 
 ## Condo lots and apartment lots
 
-The parcel reading produces different buffers for physically identical buildings, depending on whether the property was condominium-ized. R.C. 5311.11 makes each condo unit a separate parcel. An apartment complex is a single parcel. A rental-to-condo conversion would change the buffer without any physical change to the building.
+R.C. 5311.11 makes each condo unit a separate parcel. That is the narrower argument: buffer from the unit lot. An apartment complex is one parcel. A rental-to-condo conversion would shrink a unit-parcel buffer without any physical change to the building.
 
-The building-anchored reading is the only one that treats those two cases alike. That is some evidence it is the correct construction. We report parcel-to-parcel as primary because it matches published enforcement practice, and we report the building-anchored surface alongside it. No Ohio court has decided which is right.
+We do not use the inner unit parcel. We buffer from the whole development parcel because that is the stricter, over-inclusive reading. No Ohio court has decided which is right.
+
+## What this map does not know about you
+
+Every calculation on this map is deliberately over-inclusive. The map has no individual information about you. It applies the broadest version of each restriction. Where two readings are defensible, it restricts more.
+
+Specifically the map does NOT account for:
+
+### Your tier
+
+The map does not know your tier. Several restrictions apply only to some people.
+
+Lakewood § 533.17 is limited to Tier III / child-victim classifications. Brook Park, Linndale, Maple Heights, and Rocky River limited their rules to the old sexual-predator category, which Ohio abolished on January 1, 2008. Those are Cuyahoga ordinances and are not applied on this Hamilton County lookup. The legal point still stands here: a restriction can depend on your tier, and this map does not have that information.
+
+### When you were convicted
+
+The map does not know your conviction date.
+
+Berea’s ordinance applies to convictions after May 20, 2019. Olmsted Falls’ ordinance applies after June 26, 2007. Those are Cuyahoga ordinances and are not applied on this Hamilton County lookup.
+
+### When you bought or leased
+
+The map does not know when you bought or leased.
+
+Hyle v. Porter (2008): the state residency rule is not retroactive. It does not apply if you bought the home and the offense happened before July 31, 2003.
+
+Cincinnati older-home rule: a person who set up a home in a barred area before March 11, 2007 may still be covered until they move.
+
+East Cleveland has an exception for existing leases. North Olmsted excepts homes purchased before its ordinance. Those two are Cuyahoga ordinances and are not applied on this Hamilton County lookup.
+
+### Pre-2008 classification
+
+The map does not know how you were classified before 2008. *State v. Williams* (2011) addressed pre-2008 classification. This map does not apply that case to you.
+
+## Where we chose the stricter reading
+
+- Distance is property line to property line, not building to building. No Ohio court has decided. The statute uses parcel language for schools and building-and-grounds language for residences. We use the broader one.
+- For condominiums, we buffer from the whole development parcel, not the individual unit parcel — even though R.C. 5311.11 makes each unit its own parcel and is a real argument for the narrower rule.
+- We assume every licensed preschool and child care center displays the signage R.C. 2950.034(C)(5) requires. Unsigned facilities may not create a restriction at all.
+- Where an ordinance does not define “residential premises,” we apply the broader parcel-based reading rather than the narrower building-based one.
+
+## Why the bias runs this way
+
+Being wrongly told an address is restricted costs you a housing option. Being wrongly told it is open can get someone ordered out. R.C. 2950.034(B) lets any property owner within 1,000 feet bring that action.
+
+So the map errs toward restricted. If it shows restricted and an exception may apply, that is worth taking to a lawyer. Several of them are strong.
+
+The same text is on [disclaimer.html](disclaimer.html), which is where [Full terms] and [What this means] open.
 
 ## How we found each place
 
