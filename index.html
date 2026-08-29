@@ -18,15 +18,27 @@
     <h1>Home distance lookup</h1>
   </header>
 
-  <dialog class="gate" id="gate" aria-labelledby="gate-title">
-    <h2 id="gate-title">Before you use this</h2>
+  <dialog class="gate" id="gate" aria-labelledby="gate-title" closedby="none">
+    <h2 id="gate-title">Before using this map</h2>
     <p>This is not a legal clearance. No office in Ohio issues one.</p>
-    <p>This map doesn't know your tier, your conviction date, or when you moved in — and several restrictions shown here only apply to some people. On a few questions no court has ever ruled, and we use the stricter reading.</p>
-    <p>We deliberately err toward "restricted." Being wrongly told you're restricted costs you a housing option. Being wrongly told you're clear can cost you your home.</p>
-    <label class="gate-check" for="gate-ok">
-      <input id="gate-ok" type="checkbox">
-      <span>I understand this is a research tool, not legal advice, and not an approval.</span>
-    </label>
+    <p>This map does not account for a person's tier, conviction date, or move-in date. Several restrictions shown here apply only to certain people. On some questions no court has ruled, and this map uses the stricter reading.</p>
+    <p>Results err toward "restricted," deliberately. An address wrongly shown as restricted costs a housing option. An address wrongly shown as open can lead to a court order to vacate it.</p>
+    <section class="gate-privacy">
+      <h3>What this site knows</h3>
+      <p>Addresses searched here never leave the device. The map data is downloaded to the browser and every lookup runs there. No address is sent to a server, so no search can be logged, stored, subpoenaed, or breached.</p>
+      <p>There are no accounts, no cookies for tracking, and no analytics. Nothing is asked about who is searching or why. This host, like all web hosts, records standard request information including IP addresses. That is outside our control and separate from any search.</p>
+      <p>This browser stores only that you asked to skip this screen next time, and only if you check Remember this browser. No addresses.</p>
+    </section>
+    <div class="gate-checks">
+      <label class="gate-check" for="gate-ok">
+        <input id="gate-ok" type="checkbox">
+        <span>I understand this is a research tool, not legal advice, and not an approval.</span>
+      </label>
+      <label class="gate-check" for="gate-remember">
+        <input id="gate-remember" type="checkbox">
+        <span>Remember this browser</span>
+      </label>
+    </div>
     <div class="gate-actions">
       <a href="disclaimer.html">Full terms and methodology</a>
       <button type="button" id="gate-go" disabled>Continue</button>
@@ -43,9 +55,12 @@
   <div id="out" hidden aria-live="polite"></div>
 
   <aside class="privacy">
-    <h2>Your search stays with you</h2>
+    <h2>What this site knows</h2>
     <p>People using this page can be in a vulnerable spot. A list of who searched which address could be demanded in court, stolen, or used to harass someone.</p>
-    <p>This site has no server that could keep that list. After the page loads, your phone only fetches map files from this same site. We do not send your address to a mapping company. We do not use cookies. We do not keep a search history. This browser can remember that you checked the one-time terms box. It does not store addresses.</p>
+    <p>Addresses searched here never leave the device. The map data is downloaded to the browser and every lookup runs there. No address is ever sent to a server, so no search can be logged, stored, subpoenaed, or breached.</p>
+    <p>There are no accounts, no cookies for tracking, and no analytics. Nothing is asked about who is searching or why.</p>
+    <p>This site is hosted by a commercial provider that, like all web hosts, records standard request information including IP addresses. That is outside our control and separate from anything about a search.</p>
+    <p>This browser stores only that you asked to skip the opening screen next time, and only if you check Remember this browser. No addresses.</p>
   </aside>
 
   <section class="about">
