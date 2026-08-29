@@ -969,6 +969,9 @@
       dlg.addEventListener("cancel", function (ev) {
         ev.preventDefault();
       });
+      dlg.addEventListener("keydown", function (ev) {
+        if (ev.key === "Escape") ev.preventDefault();
+      });
       go.addEventListener("click", function () {
         if (!box.checked) return;
         acceptGate(!!(remember && remember.checked));
