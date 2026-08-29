@@ -3,9 +3,42 @@
 Extract date: 2026-08-25. Distances use local feet. The zone is 1,000 feet from the lot line.
 
 This page answers where a covered person may newly set up a home. It does not say who is in violation today. It is a map overlay, not a court finding.
-Hyle v. Porter (2008): the residency rule is not retroactive. It does not apply if you bought the home and the offense happened before July 31, 2003.
 
-Cincinnati older-home rule: Ord. No. 0005-2007 covers a person who set up a home in a barred area before 3-11-2007, until they move. Shown on any Cincinnati search. Not drawn as a shape.
+Every calculation on this map is deliberately over-inclusive. The map has no individual information about the person who would live at the address. It applies the broadest version of each restriction. Where two readings are defensible, it restricts more.
+
+## What we did not do
+
+- Did not send an address to a third-party geocoder.
+- Did not keep a server-side search log.
+- Did not invent Kentucky or Indiana child care.
+- Did not invent missing parks.
+- Did not treat school-age child care as decided.
+- Did not add the 12 rented school sites as protected lots.
+- Did not map official Ohio eSORN or sheriff registrant homes.
+
+## What this map does not account for
+
+Specifically the map does NOT account for:
+
+### A person's tier
+
+The map does not account for a person's tier.
+
+None of Hamilton County's five ordinances are tier-limited. Norwood covers Tiers I–III. Reading and Evendale cover all R.C. 2950.04 registrants. Tier can matter elsewhere in Ohio; it does not change any of the five Hamilton County ordinances.
+
+### The conviction date, and when the person began living there
+
+The map does not account for the conviction date or when the person began living at the address.
+
+Cincinnati § 2 (Ord. No. 0005-2007) covers a person who set up a home in a barred area before March 11, 2007, until that person moves. Reading and Golf Manor both protect pre-existing leases of more than 30 days.
+
+### Retroactivity
+
+Hyle v. Porter (2008) is statewide and applies here. The state residency rule is not retroactive if the person bought the home and the offense happened before July 31, 2003.
+
+### Pre-2008 classification
+
+The map does not account for how a person was classified before 2008. *State v. Williams* (2011) addressed pre-2008 classification. This map does not apply that case to any person.
 
 ## What the law covers
 
@@ -13,11 +46,11 @@ R.C. 2950.034 bars occupying a home within 1,000 feet of school premises, presch
 
 The premises include the real lot the place sits on. Zones start at that lot, not a geocoded point and not a building footprint.
 
-The home is also the whole lot. Current law says that at R.C. 2950.01(T). In the 2006 code that definition was 2950.01(W).
+We treat the home as the whole lot. That is a choice, not a settled-law claim; see Where we chose the stricter reading. R.C. 2950.01(T) is the current code cite for that definition; in the 2006 code it was 2950.01(W).
 
 School premises follow R.C. 2950.01 via the OEDS school-building directory joined to CAGIS lots. A school here is Ohio-limited.
 
-Ohio also counts a school-owned or leased lot if instruction, sports, or training actually happen there. Confirmed athletic lots are already inside the published 38.58 percent state-closed figure (117,997 of 305,868). Leftover untagged owner lots are frozen: 38.58 percent confirmed, ceiling 88.29 percent, best estimate 44.61 percent. Do not use 54.18 percent. That figure stacked overlapping leftover lots and counted the same homes more than once. The 12 rented school sites stay reported, not added.
+Ohio also counts a school-owned or leased lot if instruction, sports, or training actually happen there. Confirmed athletic lots are already inside the published 38.58 percent state-closed figure (117,997 of 305,868). Leftover untagged owner lots are frozen: 38.58 percent confirmed, ceiling 88.29 percent, best estimate 44.61 percent. The 12 rented school sites stay reported, not added.
 
 Inclusion is by license type, never zoning. Licensed child care center and preschool: yes. School-age child care: flagged only; not in the main surface. Type A/B family child care, in-home aide, day camp: no. Church- or school-attached centers are not dropped. Crisis and residential infant care: 0 in Hamilton County on the 4/22/2025 list.
 
@@ -26,38 +59,6 @@ Inclusion is by license type, never zoning. Licensed child care center and presc
 R.C. 5311.11 makes each condo unit a separate parcel. That is the narrower argument: buffer from the unit lot. An apartment complex is one parcel. A rental-to-condo conversion would shrink a unit-parcel buffer without any physical change to the building.
 
 We do not use the inner unit parcel. We buffer from the whole development parcel because that is the stricter, over-inclusive reading. No Ohio court has decided which is right.
-
-## What this map does not know about you
-
-Every calculation on this map is deliberately over-inclusive. The map has no individual information about you. It applies the broadest version of each restriction. Where two readings are defensible, it restricts more.
-
-Specifically the map does NOT account for:
-
-### Your tier
-
-The map does not know your tier. Several restrictions apply only to some people.
-
-Lakewood § 533.17 is limited to Tier III / child-victim classifications. Brook Park, Linndale, Maple Heights, and Rocky River limited their rules to the old sexual-predator category, which Ohio abolished on January 1, 2008. Those are Cuyahoga ordinances and are not applied on this Hamilton County lookup. The legal point still stands here: a restriction can depend on your tier, and this map does not have that information.
-
-### When you were convicted
-
-The map does not know your conviction date.
-
-Berea’s ordinance applies to convictions after May 20, 2019. Olmsted Falls’ ordinance applies after June 26, 2007. Those are Cuyahoga ordinances and are not applied on this Hamilton County lookup.
-
-### When you bought or leased
-
-The map does not know when you bought or leased.
-
-Hyle v. Porter (2008): the state residency rule is not retroactive. It does not apply if you bought the home and the offense happened before July 31, 2003.
-
-Cincinnati older-home rule: a person who set up a home in a barred area before March 11, 2007 may still be covered until they move.
-
-East Cleveland has an exception for existing leases. North Olmsted excepts homes purchased before its ordinance. Those two are Cuyahoga ordinances and are not applied on this Hamilton County lookup.
-
-### Pre-2008 classification
-
-The map does not know how you were classified before 2008. *State v. Williams* (2011) addressed pre-2008 classification. This map does not apply that case to you.
 
 ## Where we chose the stricter reading
 
@@ -68,11 +69,9 @@ The map does not know how you were classified before 2008. *State v. Williams* (
 
 ## Why the bias runs this way
 
-Being wrongly told an address is restricted costs you a housing option. Being wrongly told it is open can get someone ordered out. R.C. 2950.034(B) lets any property owner within 1,000 feet bring that action.
+An address wrongly shown as restricted costs a housing option. An address wrongly shown as open can lead to a court order to vacate it. R.C. 2950.034(B) lets any property owner within 1,000 feet bring that action.
 
 So the map errs toward restricted. If it shows restricted and an exception may apply, that is worth taking to a lawyer. Several of them are strong.
-
-The same text is on [disclaimer.html](disclaimer.html), which is where [Full terms] and [What this means] open.
 
 ## How we found each place
 
@@ -104,21 +103,11 @@ Cincinnati Ch. 763 uses the city official rec-center and pool lists, plus in-cit
 
 Norwood 533.14 maps libraries, city parks, city pools, and the community / rec centers. Schools and state-licensed day cares stay on the state floor.
 
-## What we did not do
-
-- Did not send your address to a third-party geocoder.
-- Did not keep a server-side search log.
-- Did not invent Kentucky or Indiana child care.
-- Did not invent missing parks.
-- Did not treat school-age child care as decided.
-- Did not add the 12 rented school sites as protected lots.
-- Did not map official Ohio eSORN or sheriff registrant homes.
-
 ## Sources and dates
 
 - CAGIS extract: 2026-08-25
 - DCY child care pull: 2026-08-25 08:00:10 ET
 - OEDS pull: 2026-08-25 08:00:21 ET (generated 8/25/2026 8:00:28 AM)
-- Sandbox pin: 39bdb20cd98c3e83da2323dca49276c5a8c00e17
+- Commit: e9e4a415be90c5b4e2426d1655d28cc338b31afd
 
 On this public site, a lookup measures lot line to lot line in the browser from data/facilities.geojson and the lot shard for that ZIP.

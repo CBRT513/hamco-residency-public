@@ -469,7 +469,7 @@
     return (
       '<section class="note">' +
         "<h3>Older homes — Hyle v. Porter</h3>" +
-        "<p>A 2008 Ohio Supreme Court case says this rule is not retroactive. It does not apply if you bought the home and the offense happened before July 31, 2003. A court would have to decide if that fits your case.</p>" +
+        "<p>A 2008 Ohio Supreme Court case says this rule is not retroactive. It does not apply if the person bought the home and the offense happened before July 31, 2003. A court would have to decide if that fits the case.</p>" +
       "</section>"
     );
   }
@@ -479,7 +479,7 @@
     return (
       '<section class="note">' +
         "<h3>Cincinnati older-home rule</h3>" +
-        "<p>If you set up a home in a barred area before March 11, 2007, and you have not moved, city ordinance 0005-2007 may still cover you. This page does not decide that.</p>" +
+        "<p>If a person set up a home in a barred area before March 11, 2007, and has not moved, city ordinance 0005-2007 may still cover that person. This page does not decide that.</p>" +
       "</section>"
     );
   }
@@ -635,9 +635,9 @@
       body += "<p>This map does not account for a person's tier, conviction date, or move-in date. Several restrictions apply only to certain people. Where the law is unsettled, this map uses the stricter reading.</p>";
       body += "<p>This map may show an address as restricted when it is not restricted for that person. If an address matters, that is a question for a lawyer — not for this map.</p>";
       body += "<p>Ohio law treats the whole lot as the home (R.C. 2950.01). Distance is from one lot line to the other.</p>";
-      body += "<p>Hyle v. Porter (2008): this rule is not retroactive if you bought the home and the offense happened before July 31, 2003.</p>";
+      body += "<p>Hyle v. Porter (2008): this rule is not retroactive if the person bought the home and the offense happened before July 31, 2003.</p>";
       if (fold(model.city) === "CINCINNATI") {
-        body += "<p>Cincinnati older-home rule: a home set up in a barred area before March 11, 2007, may still be covered until you move (Ord. 0005-2007).</p>";
+        body += "<p>Cincinnati older-home rule: a home set up in a barred area before March 11, 2007, may still be covered until the person moves (Ord. 0005-2007).</p>";
       }
     } else {
       body += "<h1>We did not find a protected location within 1,000 feet of this property.</h1>";
