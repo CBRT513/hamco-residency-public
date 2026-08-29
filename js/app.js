@@ -38,8 +38,11 @@
 
   var mem = {};
   var boot = { manifest: null, zips: null, cities: null, streets: null };
+  var bootReady = null;
+  var searchGen = 0;
   var mapObj = null;
   var lastModel = null;
+  var CHOICE_CAP = 20;
 
   function $(id) { return document.getElementById(id); }
 
@@ -106,8 +109,13 @@
       if (q.length >= name.length && q.slice(-name.length) === name) {
         var before = q.slice(0, q.length - name.length);
         if (before === "" || /[,\s]$/.test(before)) {
+          var leftover = before.replace(/[,\s]+$/, "");
+          var leftoverBits = leftover.split(" ").filter(Boolean);
+          var onlyHouseNum = leftoverBits.length === 1 && /^\d+[A-Z]?$/.test(leftoverBits[0]);
+          /* House + city-named stem (5282 montgomery) must stay a street, not a city. */
+          if (onlyHouseNum) continue;
           city = name;
-          q = before.replace(/[,\s]+$/, "");
+          q = leftover;
           break;
         }
       }
@@ -139,31 +147,35 @@
     return false;
   }
 
+  function streetIndexKeys(street) {
+    var keys = [];
+    if (!street || !boot.streets) return keys;
+    if (boot.streets[street]) keys.push(street);
+    if (!hasSuffix(street)) {
+      var tryS = ["ST", "AVE", "RD", "DR", "LN", "CT", "PL", "BLVD", "PKWY", "PIKE",
+        "TER", "CIR", "HWY", "WAY", "TRL", "SQ"];
+      for (var i = 0; i < tryS.length; i++) {
+        var k = street + " " + tryS[i];
+        if (boot.streets[k]) keys.push(k);
+      }
+    }
+    if (keys.length === 0) {
+      var pref = street + " ";
+      for (var sk in boot.streets) {
+        if (sk === street || sk.indexOf(pref) === 0) keys.push(sk);
+      }
+    }
+    return keys;
+  }
+
   function shardsFor(p) {
     var set = {};
     function add(id) { if (id) set[id] = 1; }
     if (p.zip) add(p.zip);
-    var street = p.street;
-    var keys = [];
-    if (street && boot.streets) {
-      if (boot.streets[street]) keys.push(street);
-      if (!hasSuffix(street)) {
-        var tryS = ["ST", "AVE", "RD", "DR", "LN", "CT", "PL", "BLVD", "PKWY", "PIKE"];
-        for (var i = 0; i < tryS.length; i++) {
-          var k = street + " " + tryS[i];
-          if (boot.streets[k]) keys.push(k);
-        }
-      }
-      if (keys.length === 0) {
-        var pref = street + " ";
-        for (var sk in boot.streets) {
-          if (sk === street || sk.indexOf(pref) === 0) keys.push(sk);
-        }
-      }
-      for (var j = 0; j < keys.length; j++) {
-        var ids = boot.streets[keys[j]] || [];
-        for (var n = 0; n < ids.length; n++) add(ids[n]);
-      }
+    var keys = streetIndexKeys(p.street);
+    for (var j = 0; j < keys.length; j++) {
+      var ids = boot.streets[keys[j]] || [];
+      for (var n = 0; n < ids.length; n++) add(ids[n]);
     }
     return Object.keys(set);
   }
@@ -185,6 +197,7 @@
     if (!qs) return 0;
     if (p.city && fold(row.c) !== p.city) return 0;
     if (p.zip && String(row.z) !== p.zip) return 0;
+    if (!p.city && row.c && !isHamCity(fold(row.c))) return 0;
     if (rs === qs) return 3;
     if (rs.indexOf(qs + " ") === 0) return 2;
     if (qs.indexOf(rs + " ") === 0) return 2;
@@ -438,6 +451,23 @@
     );
   }
 
+  function resultLinePlain() {
+    return "Not a legal clearance. Tier, conviction date, and move-in date are not accounted for — some restrictions shown may not apply.";
+  }
+
+  function blockedHeadline() {
+    return "Shown as restricted. Some rules may not apply.";
+  }
+
+  function blockedCountLine(n) {
+    return "This address is within 1,000 feet of " + n +
+      " protected location" + (n === 1 ? "" : "s") + ".";
+  }
+
+  function missHTML() {
+    return '<p class="err">We couldn\'t find that address. Try adding the city or a street suffix (Rd, Ave, St).</p>';
+  }
+
   function shortFormHTML() {
     return (
       '<section class="short-form">' +
@@ -625,15 +655,13 @@
     }
     var body = "";
     if (model.kind === "blocked") {
-      body += "<h1>This address is within 1,000 feet of " + model.blockers.length +
-        " protected location" + (model.blockers.length === 1 ? "" : "s") + ".</h1>";
+      body += "<h1>" + esc(blockedHeadline()) + "</h1>";
+      body += "<p>" + esc(blockedCountLine(model.blockers.length)) + "</p>";
       body += "<p><strong>" + esc(model.label) + "</strong></p>";
       body += "<p>" + asOf() + "</p>";
-      body += "<p>Not a legal clearance. Tier, conviction date, and move-in date are not accounted for — some restrictions shown may not apply.</p>";
+      body += "<p>" + esc(resultLinePlain()) + "</p>";
       body += "<div class=\"tbl\"><table><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>" +
         rows + "</tbody></table></div>";
-      body += "<p>This map does not account for a person's tier, conviction date, or move-in date. Several restrictions apply only to certain people. Where the law is unsettled, this map uses the stricter reading.</p>";
-      body += "<p>This map may show an address as restricted when it is not restricted for that person. If an address matters, that is a question for a lawyer — not for this map.</p>";
       body += "<p>Ohio law treats the whole lot as the home (R.C. 2950.01). Distance is from one lot line to the other.</p>";
       body += "<p>Hyle v. Porter (2008): this rule is not retroactive if the person bought the home and the offense happened before July 31, 2003.</p>";
       if (fold(model.city) === "CINCINNATI") {
@@ -643,12 +671,10 @@
       body += "<h1>We did not find a protected location within 1,000 feet of this property.</h1>";
       body += "<p><strong>" + esc(model.label) + "</strong></p>";
       body += "<p>" + asOf() + "</p>";
-      body += "<p>Not a legal clearance. Tier, conviction date, and move-in date are not accounted for — some restrictions shown may not apply.</p>";
+      body += "<p>" + esc(resultLinePlain()) + "</p>";
       if (model.nearest) {
         body += "<p>Nearest protected location: " + esc(model.nearest.name) + " — " + fmtFt(model.nearest.dist) + ".</p>";
       }
-      body += "<p>This map does not account for a person's tier, conviction date, or move-in date. Several restrictions apply only to certain people. Where the law is unsettled, this map uses the stricter reading.</p>";
-      body += "<p>This map may show an address as restricted when it is not restricted for that person. If an address matters, that is a question for a lawyer — not for this map.</p>";
       body += "<p>This is not a court sign-off. A prosecutor, sheriff, or judge can still reach a different result.</p>";
       if (model.nearUntested) {
         body += "<p>School-district lot we have not fully checked: " +
@@ -670,8 +696,9 @@
       body + "</body></html>";
   }
 
-  function renderChoices(rows) {
+  function renderChoices(rows, note) {
     var html = '<div class="banner plain"><h2>More than one match</h2><p>Pick the right city.</p>' +
+      (note ? "<p>" + esc(note) + "</p>" : "") +
       '<p class="asof">' + asOf() + "</p></div><div class=\"choices\">";
     for (var i = 0; i < rows.length; i++) {
       var r = rows[i];
@@ -699,15 +726,14 @@
     }
     var html =
       '<div class="banner rust">' +
-        "<h2>This address is within 1,000 feet of " + n +
-        " protected location" + (n === 1 ? "" : "s") + ".</h2>" +
+        "<h2>" + esc(blockedHeadline()) + "</h2>" +
+        '<p class="count">' + esc(blockedCountLine(n)) + "</p>" +
         '<p class="asof">' + asOf() + "</p>" +
       "</div>" +
       resultLineHTML() +
       '<p class="addr-line">' + esc(model.label) + "</p>" +
       '<div class="hits-wrap"><table class="hits"><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>' +
       rows + "</tbody></table></div>" +
-      shortFormHTML() +
       lineHTML() + hyleHTML() + cincyHTML(model.city) +
       mapHTML("Lot outlines and the 1,000-foot zone") +
       '<p class="legend"><span><i class="swatch ink"></i>This lot</span>' +
@@ -747,7 +773,6 @@
       "<p>" + near + "</p>" +
       (bandText ? '<p class="margin-box ' + band + '">' + bandText + "</p>" : "") +
       un +
-      shortFormHTML() +
       notFoundLegalHTML() +
       mapHTML("This lot and the nearest protected lot") +
       '<p class="legend"><span><i class="swatch ink"></i>This lot</span>' +
@@ -868,38 +893,96 @@
       });
   }
 
+  function loadBoot() {
+    if (bootReady) return bootReady;
+    bootReady = Promise.all([
+      getJSON("data/manifest.json"),
+      getJSON("data/addresses/zips.json"),
+      getJSON("data/addresses/cities.json"),
+      getJSON("data/addresses/streets.json")
+    ]).then(function (xs) {
+      boot.manifest = xs[0];
+      boot.zips = xs[1];
+      boot.cities = xs[2];
+      boot.streets = xs[3];
+      return boot;
+    }).catch(function (err) {
+      bootReady = null;
+      throw err;
+    });
+    return bootReady;
+  }
+
+  function bootLoaded() {
+    return !!(boot.streets && boot.cities && boot.zips);
+  }
+
+  function showOutside() {
+    showOut(
+      '<div class="banner plain"><h2>That address is outside Hamilton County.</h2>' +
+      "<p>This map only covers Hamilton County, Ohio. We will not guess across the river or in another county.</p>" +
+      '<p class="asof">' + asOf() + "</p></div>"
+    );
+  }
+
+  function addrKey(row) {
+    return fold(row.a) + "|" + fold(row.c) + "|" + String(row.z || "");
+  }
+
+  function distinctAddrCount(rows) {
+    var seen = {};
+    var n = 0;
+    for (var i = 0; i < rows.length; i++) {
+      var k = addrKey(rows[i]);
+      if (!seen[k]) {
+        seen[k] = 1;
+        n++;
+      }
+    }
+    return n;
+  }
+
   function search(raw) {
+    var gen = ++searchGen;
+    if (!bootLoaded()) {
+      showOut("<p>Looking up…</p>");
+      loadBoot().then(function () {
+        if (gen !== searchGen) return;
+        runSearch(raw, gen);
+      }).catch(function () {
+        if (gen !== searchGen) return;
+        showOut('<p class="err">We could not load the address list. Try again.</p>');
+      });
+      return;
+    }
+    runSearch(raw, gen);
+  }
+
+  function runSearch(raw, gen) {
     var p = parseQuery(raw);
     if (!p.num && !p.street) {
       showOut('<p class="err">Type an address.</p>');
       return;
     }
     if (outsideHint(p) && (!p.street || !p.num || p.state === "KY" || p.state === "IN" || (p.zip && !isHamZip(p.zip)) || (p.city && !isHamCity(p.city)))) {
-      showOut(
-        '<div class="banner plain"><h2>That address is outside Hamilton County.</h2>' +
-        "<p>This map only covers Hamilton County, Ohio. We will not guess across the river or in another county.</p>" +
-        '<p class="asof">' + asOf() + "</p></div>"
-      );
+      showOutside();
       return;
     }
     var shards = shardsFor(p);
     if (p.zip && isHamZip(p.zip) && shards.indexOf(p.zip) === -1) shards.push(p.zip);
     if (!shards.length) {
       if ((p.city && !isHamCity(p.city)) || (p.zip && !isHamZip(p.zip))) {
-        showOut(
-          '<div class="banner plain"><h2>That address is outside Hamilton County.</h2>' +
-          "<p>This map only covers Hamilton County, Ohio. We will not guess.</p>" +
-          '<p class="asof">' + asOf() + "</p></div>"
-        );
+        showOutside();
         return;
       }
-      showOut('<p class="err">We couldn\'t find that address. Try including the city.</p>');
+      showOut(missHTML());
       return;
     }
     showOut("<p>Looking up…</p>");
     Promise.all(shards.map(function (id) {
       return getJSON("data/addresses/" + id + ".json").catch(function () { return []; });
     })).then(function (lists) {
+      if (gen !== searchGen) return;
       var rows = [];
       var seen = {};
       for (var i = 0; i < lists.length; i++) {
@@ -918,23 +1001,28 @@
       }
       if (!rows.length) {
         if ((p.city && !isHamCity(p.city)) || (p.zip && !isHamZip(p.zip)) || p.state === "KY" || p.state === "IN") {
-          showOut(
-            '<div class="banner plain"><h2>That address is outside Hamilton County.</h2>' +
-            "<p>This map only covers Hamilton County, Ohio. We will not guess.</p>" +
-            '<p class="asof">' + asOf() + "</p></div>"
-          );
+          showOutside();
           return;
         }
-        showOut('<p class="err">We couldn\'t find that address. Try including the city.</p>');
+        showOut(missHTML());
         return;
       }
-      if (rows.length === 1) {
+      if (rows.length === 1 || distinctAddrCount(rows) === 1) {
         finishRow(rows[0]);
         return;
       }
-      if (rows.length > 8) rows = rows.slice(0, 8);
-      renderChoices(rows);
+      var note = "";
+      if (p.num && !p.city) {
+        if (rows.length > CHOICE_CAP) {
+          rows = rows.slice(0, CHOICE_CAP);
+          note = "Showing the first " + CHOICE_CAP + ".";
+        }
+      } else if (rows.length > 8) {
+        rows = rows.slice(0, 8);
+      }
+      renderChoices(rows, note);
     }).catch(function () {
+      if (gen !== searchGen) return;
       showOut('<p class="err">We could not load the address list. Try again.</p>');
     });
   }
@@ -989,18 +1077,8 @@
   }
 
   function start() {
-    Promise.all([
-      getJSON("data/manifest.json"),
-      getJSON("data/addresses/zips.json"),
-      getJSON("data/addresses/cities.json"),
-      getJSON("data/addresses/streets.json")
-    ]).then(function (xs) {
-      boot.manifest = xs[0];
-      boot.zips = xs[1];
-      boot.cities = xs[2];
-      boot.streets = xs[3];
-    }).catch(function () {
-      /* page still accepts a search; it will fail softly */
+    loadBoot().catch(function () {
+      /* page still accepts a search; it waits for boot or fails softly */
     });
 
     bindGate();
