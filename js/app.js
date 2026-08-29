@@ -5,7 +5,8 @@
   var FT_PER_DEG_LAT = 364567.2;
   var LIMIT_FT = 1000;
   var SITE_PLACEHOLDER = "https://YOUR-SITE.example";
-  var GATE_KEY = "hamco-gate-ok";
+  var GATE_KEY = "hamco-gate-remember";
+  var GATE_KEY_OLD = "hamco-gate-ok";
   var gateOkMemory = false;
 
   var SUFFIX = {
@@ -411,8 +412,7 @@
     return "Data current as of " + rel;
   }
 
-  function readGate() {
-    if (gateOkMemory) return true;
+  function readRemembered() {
     try {
       return window.localStorage.getItem(GATE_KEY) === "1";
     } catch (e) {
@@ -420,24 +420,29 @@
     }
   }
 
-  function writeGate() {
+  function readGate() {
+    return gateOkMemory || readRemembered();
+  }
+
+  function acceptGate(remember) {
     gateOkMemory = true;
     try {
-      window.localStorage.setItem(GATE_KEY, "1");
+      if (remember) window.localStorage.setItem(GATE_KEY, "1");
+      window.localStorage.removeItem(GATE_KEY_OLD);
     } catch (e) {}
   }
 
   function resultLineHTML() {
     return (
-      '<p class="result-line">Not a legal clearance. This map doesn\'t know your tier, conviction date, or move-in date — some restrictions shown may not apply to you. <a href="disclaimer.html">What this means</a></p>'
+      '<p class="result-line">Not a legal clearance. Tier, conviction date, and move-in date are not accounted for — some restrictions shown may not apply. <a href="disclaimer.html">What this means</a></p>'
     );
   }
 
   function shortFormHTML() {
     return (
       '<section class="short-form">' +
-        "<p>This map does not know who you are. It applies every restriction to every address, regardless of your tier, when you were convicted, when you bought or leased, or how you were classified. Several restrictions here do not apply to everyone. Where the law is unsettled, we show the stricter reading.</p>" +
-        "<p>That means this map may show an address as restricted when it is not restricted for you. If an address matters to you, that is a question for a lawyer — not for this map.</p>" +
+        "<p>This map does not account for a person's tier, conviction date, or move-in date. Several restrictions apply only to certain people. Where the law is unsettled, this map uses the stricter reading.</p>" +
+        "<p>This map may show an address as restricted when it is not restricted for that person. If an address matters, that is a question for a lawyer — not for this map.</p>" +
       "</section>"
     );
   }
@@ -624,11 +629,11 @@
         " protected location" + (model.blockers.length === 1 ? "" : "s") + ".</h1>";
       body += "<p><strong>" + esc(model.label) + "</strong></p>";
       body += "<p>" + asOf() + "</p>";
-      body += "<p>Not a legal clearance. This map doesn't know your tier, conviction date, or move-in date — some restrictions shown may not apply to you.</p>";
+      body += "<p>Not a legal clearance. Tier, conviction date, and move-in date are not accounted for — some restrictions shown may not apply.</p>";
       body += "<div class=\"tbl\"><table><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>" +
         rows + "</tbody></table></div>";
-      body += "<p>This map does not know who you are. It applies every restriction to every address, regardless of your tier, when you were convicted, when you bought or leased, or how you were classified. Several restrictions here do not apply to everyone. Where the law is unsettled, we show the stricter reading.</p>";
-      body += "<p>That means this map may show an address as restricted when it is not restricted for you. If an address matters to you, that is a question for a lawyer — not for this map.</p>";
+      body += "<p>This map does not account for a person's tier, conviction date, or move-in date. Several restrictions apply only to certain people. Where the law is unsettled, this map uses the stricter reading.</p>";
+      body += "<p>This map may show an address as restricted when it is not restricted for that person. If an address matters, that is a question for a lawyer — not for this map.</p>";
       body += "<p>Ohio law treats the whole lot as the home (R.C. 2950.01). Distance is from one lot line to the other.</p>";
       body += "<p>Hyle v. Porter (2008): this rule is not retroactive if you bought the home and the offense happened before July 31, 2003.</p>";
       if (fold(model.city) === "CINCINNATI") {
@@ -638,12 +643,12 @@
       body += "<h1>We did not find a protected location within 1,000 feet of this property.</h1>";
       body += "<p><strong>" + esc(model.label) + "</strong></p>";
       body += "<p>" + asOf() + "</p>";
-      body += "<p>Not a legal clearance. This map doesn't know your tier, conviction date, or move-in date — some restrictions shown may not apply to you.</p>";
+      body += "<p>Not a legal clearance. Tier, conviction date, and move-in date are not accounted for — some restrictions shown may not apply.</p>";
       if (model.nearest) {
         body += "<p>Nearest protected location: " + esc(model.nearest.name) + " — " + fmtFt(model.nearest.dist) + ".</p>";
       }
-      body += "<p>This map does not know who you are. It applies every restriction to every address, regardless of your tier, when you were convicted, when you bought or leased, or how you were classified. Several restrictions here do not apply to everyone. Where the law is unsettled, we show the stricter reading.</p>";
-      body += "<p>That means this map may show an address as restricted when it is not restricted for you. If an address matters to you, that is a question for a lawyer — not for this map.</p>";
+      body += "<p>This map does not account for a person's tier, conviction date, or move-in date. Several restrictions apply only to certain people. Where the law is unsettled, this map uses the stricter reading.</p>";
+      body += "<p>This map may show an address as restricted when it is not restricted for that person. If an address matters, that is a question for a lawyer — not for this map.</p>";
       body += "<p>This is not a court sign-off. A prosecutor, sheriff, or judge can still reach a different result.</p>";
       if (model.nearUntested) {
         body += "<p>School-district lot we have not fully checked: " +
@@ -949,21 +954,24 @@
   function bindGate() {
     var dlg = $("gate");
     var box = $("gate-ok");
+    var remember = $("gate-remember");
     var go = $("gate-go");
     if (!dlg || !box || !go) return true;
 
+    function syncGo() {
+      go.disabled = !box.checked;
+    }
+
     if (!gateBound) {
       gateBound = true;
-      box.addEventListener("change", function () {
-        go.disabled = !box.checked;
-      });
-      go.disabled = !box.checked;
+      box.addEventListener("change", syncGo);
+      if (remember) remember.addEventListener("change", syncGo);
       dlg.addEventListener("cancel", function (ev) {
         ev.preventDefault();
       });
       go.addEventListener("click", function () {
         if (!box.checked) return;
-        writeGate();
+        acceptGate(!!(remember && remember.checked));
         if (typeof dlg.close === "function") dlg.close();
         else dlg.removeAttribute("open");
         var q = $("q");
@@ -971,6 +979,7 @@
       });
     }
 
+    syncGo();
     if (readGate()) return true;
     openGate();
     return false;
