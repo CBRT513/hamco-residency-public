@@ -179,6 +179,7 @@ p.foot {
 }
 .banner h2 { margin: 0 0 6px; font-size: 1.15rem; color: inherit; }
 .banner p { margin: 0; }
+.banner .count { margin: 0; font-size: 0.98rem; font-weight: 500; }
 .asof { font-size: 0.88rem; opacity: 0.9; margin-top: 6px; }
 
 .addr-line { font-weight: 700; margin: 0 0 12px; }
