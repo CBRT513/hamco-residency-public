@@ -12,6 +12,7 @@ Every calculation on this map is deliberately over-inclusive. The map has no ind
 - Did not keep a server-side search log.
 - Did not invent Kentucky or Indiana child care.
 - Did not invent missing parks.
+- Did not treat CRC sports complexes as Cincinnati rec centers. Schmidt Recreation Complex is the East End example.
 - Did not treat school-age child care as decided.
 - Did not add the 12 rented school sites as protected lots.
 - Did not map official Ohio eSORN or sheriff registrant homes.
@@ -99,7 +100,7 @@ Headline is housing units (address points on housing lots). County universe A = 
 
 Cincinnati, Norwood, Reading, Golf Manor, and Evendale add parks, pools, libraries, or rec centers. Those zones stop at that city line. State-law places are not grown a second time.
 
-Cincinnati Ch. 763 uses the city official rec-center and pool lists, plus in-city YMCA and Boys and Girls Club sites. Not every park. Spraygrounds are not swimming pools.
+Cincinnati Ch. 763-5 extras came from the CRC Recreation Center directory (22 centers) and the aquatics list (24 public swimming pools; spraygrounds out), plus in-city YMCA and Boys and Girls Club sites. Not every park, and not the broader CRC Playground, Sports Field, or Boat Ramp lists. A sports complex is not a recreation center under Ch. 763-5. Schmidt Recreation Complex is unshaded for that reason. CRC files it as a playground (Schmidt Sports Complex, 250 St. Peters), football (SCHIMDT Sports Complex, 3020 Humbert), soccer, and boat ramp. It is not on the 22 rec-center slugs and is not a pool. Live CRC labels do not contain "Recreation"; that name is vernacular. This is not LeBlond Rec Center/Pool at 2335 Riverside, which is already mapped. 2501 Riverside is St. Rose Rec Area / church and is also not a 763 extra. About 153 other CRC broader-directory sites are out the same way; 89 of those CRC labels say Recreation Area or Recreation Complex. The site is city-owned and CRC-operated. No district home or practice listing was found, and CRC's "CPS Free" permit fee class is not a Schmidt school lease, so it was not added to the state floor.
 
 Norwood 533.14 maps libraries, city parks, city pools, and the community / rec centers. Schools and state-licensed day cares stay on the state floor.
 
