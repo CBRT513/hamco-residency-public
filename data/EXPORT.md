@@ -4,7 +4,7 @@ This is a **one-way pinned export** of the Hamilton County residency-restriction
 for a new public site. The public repo must **not write back** into
 `cbrt513/hamco-residency-gis`.
 
-Pinned sandbox commit: `915c92b73ed18a6a8362ae29b37850e5a8be3aa9`.
+Release id: `v2026-10-21`.
 
 CAGIS extract **2026-08-25**. DCY Ohio_Daycares_view **2026-08-25 08:00:10 ET**.
 OEDS **2026-08-25 08:00:21 ET** (generated 8/25/2026 8:00:28 AM).

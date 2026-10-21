@@ -3,7 +3,7 @@
   "data_as_of": "2026-08-25",
   "condo_rule": "whole development: condo units and PUD pads are measured from every unit pad plus the common area",
   "sandbox_repo": "cbrt513/hamco-residency-gis",
-  "sandbox_commit": "915c92b73ed18a6a8362ae29b37850e5a8be3aa9",
+  "release_id": "v2026-10-21",
   "cagis_extract": "2026-08-25",
   "dcy_pulled_et": "2026-08-25 08:00:10 ET",
   "oeds_pulled_et": "2026-08-25 08:00:21 ET",
