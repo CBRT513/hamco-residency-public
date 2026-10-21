@@ -1,6 +1,6 @@
 # How we measured
 
-Extract date: 2026-08-25. Distances use local feet. The zone is 1,000 feet from the lot line.
+Extract date: 2026-08-25. Data release: 2026-10-21. Distances use local feet. The zone is 1,000 feet from the lot line.
 
 This page answers where a covered person may newly set up a home. It does not say who is in violation today. It is a map overlay, not a court finding.
 
@@ -51,7 +51,7 @@ We treat the home as the whole lot. That is a choice, not a settled-law claim; s
 
 School premises follow R.C. 2950.01 via the OEDS school-building directory joined to CAGIS lots. A school here is Ohio-limited.
 
-Ohio also counts a school-owned or leased lot if instruction, sports, or training actually happen there. Confirmed athletic lots are already inside the published 38.58 percent state-closed figure (117,997 of 305,868). Leftover untagged owner lots are frozen: 38.58 percent confirmed, ceiling 88.29 percent, best estimate 44.61 percent. The 12 rented school sites stay reported, not added.
+Ohio also counts a school-owned or leased lot if instruction, sports, or training actually happen there. Confirmed athletic lots are already inside the published 39.47 percent state-closed figure (120,738 of 305,868). Leftover untagged owner lots are frozen: 39.47 percent confirmed, ceiling 71.77 percent, best estimate 44.65 percent. The 12 rented school sites stay reported, not added.
 
 Inclusion is by license type, never zoning. Licensed child care center and preschool: yes. School-age child care: flagged only; not in the main surface. Type A/B family child care, in-home aide, day camp: no. Church- or school-attached centers are not dropped. Crisis and residential infant care: 0 in Hamilton County on the 4/22/2025 list.
 
@@ -60,6 +60,8 @@ Inclusion is by license type, never zoning. Licensed child care center and presc
 R.C. 5311.11 makes each condo unit a separate parcel. That is the narrower argument: buffer from the unit lot. An apartment complex is one parcel. A rental-to-condo conversion would shrink a unit-parcel buffer without any physical change to the building.
 
 We do not use the inner unit parcel. We buffer from the whole development parcel because that is the stricter, over-inclusive reading. No Ohio court has decided which is right.
+
+The whole development is every unit lot that shares the condo record, plus the shared common land (drives, greens, pools, clubhouse lots) owned by its association. Lots in a planned development (PUD) are treated the same way. When a lookup lands on one of these lots, the map measures from the whole development and says so.
 
 ## Where we chose the stricter reading
 
@@ -92,9 +94,9 @@ School zones are larger than perfect 1,000-foot circles because they start from 
 
 Headline is housing units (address points on housing lots). County universe A = 305,868.
 
-- State law: 38.58 percent inside 1,000 feet (117,997 homes).
-- State law plus city rules: 40.71 percent (124,511 homes).
-- Leftover school-owned lots: 38.58 percent confirmed, 88.29 percent ceiling, 44.61 percent best estimate.
+- State law: 39.47 percent inside 1,000 feet (120,738 homes).
+- State law plus city rules: 41.62 percent (127,307 homes).
+- Leftover school-owned lots: 39.47 percent confirmed, 71.77 percent ceiling, 44.65 percent best estimate.
 
 ## City rules
 
@@ -109,6 +111,7 @@ Norwood 533.14 maps libraries, city parks, city pools, and the community / rec c
 - CAGIS extract: 2026-08-25
 - DCY child care pull: 2026-08-25 08:00:10 ET
 - OEDS pull: 2026-08-25 08:00:21 ET (generated 8/25/2026 8:00:28 AM)
+- Data release: 2026-10-21 (same source pulls, whole-development condo rule, corrected school and child care lots)
 - Commit: e9e4a415be90c5b4e2426d1655d28cc338b31afd
 
 On this public site, a lookup measures lot line to lot line in the browser from data/facilities.geojson and the lot shard for that ZIP.
