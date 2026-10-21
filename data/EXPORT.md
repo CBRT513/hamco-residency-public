@@ -1,18 +1,23 @@
-# hamco public release 2026-08-25
+# hamco public release 2026-10-21
 
 This is a **one-way pinned export** of the Hamilton County residency-restriction map
 for a new public site. The public repo must **not write back** into
 `cbrt513/hamco-residency-gis`.
 
-Pinned sandbox commit: `39bdb20cd98c3e83da2323dca49276c5a8c00e17`.
+Release id: `v2026-10-21`.
 
 CAGIS extract **2026-08-25**. DCY Ohio_Daycares_view **2026-08-25 08:00:10 ET**.
 OEDS **2026-08-25 08:00:21 ET** (generated 8/25/2026 8:00:28 AM).
 Buffer **1,000 ft**. Public geometries are **WGS84**.
 
-County headline (habitable addresses): A = 305,868; closed under state = **38.578%**;
-closed under state + ordinance = **40.707%**; unique-union best estimate **44.61%**;
-overlapping-sum ceiling **88.29%**. 2,180 leftover (R)(2) owner pins remain untested.
+County headline (habitable addresses): A = 305,868; closed under state = **39.474%**;
+closed under state + ordinance = **41.622%**; unique-union best estimate **44.65%**;
+overlapping-sum ceiling **71.77%** (bounds method `open_address`). 2,180 leftover (R)(2) owner pins remain untested.
+
+Condo units and PUD pads are measured from the whole development (every unit
+pad plus the common area). Each parcel shard holds a development's footprint
+once (`devid`, `name`, `n`); member parcels carry `dev`. Source data are still
+as of **2026-08-25**.
 12 lease venues were reported and not added.
 
 ## Files
@@ -22,12 +27,11 @@ overlapping-sum ceiling **88.29%**. 2,180 leftover (R)(2) owner pins remain unte
 | `manifest.json` | release pin, dates, headline, file list |
 | `CHECK.json` | acceptance counts (n_untested must be 2180) |
 | `addresses/` | all CAGIS address points, sharded by ZIP (street first letter if ZIP missing). Compact records `a,c,z,pid,lon,lat`. `index.json`, `streets.json` (street token → shard ids), `cities.json` / `zips.json` for out-of-county detection |
-| `parcels/` | simplified parcel polygons (same shard keys). Every parcel in the address index, plus facility hosts and the 2,180 untested pins. Properties `pid` only |
+| `parcels/` | simplified parcel polygons (same shard keys). Every parcel in the address index, plus facility hosts and the 2,180 untested pins. Properties `pid` (and `dev` for condo / PUD members), plus one footprint feature per development (`devid`, `name`, `n`) |
 | `facilities.geojson` | slim hosts: name, type, parcelid, law. Parcel polygon. WGS84 |
 | `untested_r2.geojson` | the 2,180 leftover owner pins (parcelid, owner, address, municipality, score, acres) |
 | `county.geojson` | Hamilton County boundary |
 | `corps.geojson` | Cincinnati, Norwood, Reading, Golf Manor, Evendale (which city ordinance applies) |
-| `docs/METHOD.md` | frozen method (copy, not edited) |
 | `docs/headline.json` | frozen headline (copy, not edited) |
 | `docs/R2_LEASE_CANDIDATES.md` | the 12 lease venues (copy, not edited) |
 | `docs/lease-12.json` | slim machine list of those 12 venues |

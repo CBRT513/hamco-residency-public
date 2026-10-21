@@ -11,13 +11,13 @@
   },
   "largest_parcel_shard": {
     "id": "45231",
-    "bytes": 3573906,
-    "n": 15877
+    "bytes": 3596638,
+    "n": 15890
   },
   "largest_shard_bytes": {
     "id": "45231",
-    "bytes": 3573906,
-    "n": 15877
+    "bytes": 3596638,
+    "n": 15890
   },
   "hopkins_1900": {
     "resolved": true,
@@ -44,6 +44,8 @@
       "lat": 39.173962
     }
   },
-  "sandbox_commit": "39bdb20cd98c3e83da2323dca49276c5a8c00e17",
-  "sandbox_unmodified": true
+  "release_id": "v2026-10-21",
+  "sandbox_unmodified": true,
+  "n_developments": 907,
+  "n_dev_member_pids": 24566
 }

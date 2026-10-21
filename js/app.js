@@ -396,6 +396,26 @@
     return true;
   }
 
+  function findDevelopment(fc, devid) {
+    if (!fc || !fc.features || !devid) return null;
+    for (var i = 0; i < fc.features.length; i++) {
+      if (String(fc.features[i].properties.devid) === String(devid)) return fc.features[i];
+    }
+    return null;
+  }
+
+  function devText(dev) {
+    if (!dev) return "";
+    var who = dev.name ? " (" + dev.name + ")" : "";
+    return "This lot is part of a condominium or planned development" + who +
+      ". We measured from the whole development: " + dev.n +
+      " lots, including the shared common land, not just this one.";
+  }
+
+  function devHTML(dev) {
+    return dev ? '<p class="dev-note">' + esc(devText(dev)) + "</p>" : "";
+  }
+
   function findParcel(fc, pid) {
     if (!fc || !fc.features) return null;
     for (var i = 0; i < fc.features.length; i++) {
@@ -421,8 +441,10 @@
   }
 
   function asOf() {
-    var rel = (boot.manifest && boot.manifest.release) || "2026-08-25";
-    return "Data current as of " + rel;
+    var m = boot.manifest || {};
+    var asof = m.data_as_of || m.release || "2026-08-25";
+    var rel = m.release && m.release !== asof ? " (release " + m.release + ")" : "";
+    return "Data current as of " + asof + rel;
   }
 
   function readRemembered() {
@@ -640,7 +662,7 @@
 
   function printHTML(model) {
     var day = etStamp();
-    var commit = (boot.manifest && boot.manifest.sandbox_commit) || "";
+    var release = (boot.manifest && boot.manifest.release) || "";
     var url = (location && location.origin && location.origin.indexOf("http") === 0)
       ? location.origin + "/"
       : SITE_PLACEHOLDER;
@@ -658,6 +680,7 @@
       body += "<h1>" + esc(blockedHeadline()) + "</h1>";
       body += "<p>" + esc(blockedCountLine(model.blockers.length)) + "</p>";
       body += "<p><strong>" + esc(model.label) + "</strong></p>";
+      if (model.dev) body += "<p>" + esc(devText(model.dev)) + "</p>";
       body += "<p>" + asOf() + "</p>";
       body += "<p>" + esc(resultLinePlain()) + "</p>";
       body += "<div class=\"tbl\"><table><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>" +
@@ -670,6 +693,7 @@
     } else {
       body += "<h1>We did not find a protected location within 1,000 feet of this property.</h1>";
       body += "<p><strong>" + esc(model.label) + "</strong></p>";
+      if (model.dev) body += "<p>" + esc(devText(model.dev)) + "</p>";
       body += "<p>" + asOf() + "</p>";
       body += "<p>" + esc(resultLinePlain()) + "</p>";
       if (model.nearest) {
@@ -687,7 +711,7 @@
       " leftover school-owned lots; " +
       ((boot.manifest && boot.manifest.n_lease_venues) || 12) +
       " rented school sites; Kentucky or Indiana child care; a new license can change this answer.</p>";
-    body += "<p>Lot id " + esc(model.pid) + ". Printed " + day + " ET. Source pin " + esc(commit) + ".</p>";
+    body += "<p>Lot id " + esc(model.pid) + ". Printed " + day + " ET. Data release " + esc(release) + ".</p>";
     body += "<p>Site: " + esc(url) + "</p>";
     return "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\">" +
       "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">" +
@@ -732,6 +756,7 @@
       "</div>" +
       resultLineHTML() +
       '<p class="addr-line">' + esc(model.label) + "</p>" +
+      devHTML(model.dev) +
       '<div class="hits-wrap"><table class="hits"><thead><tr><th>Location</th><th>Type</th><th>Distance</th><th>Law</th></tr></thead><tbody>' +
       rows + "</tbody></table></div>" +
       lineHTML() + hyleHTML() + cincyHTML(model.city) +
@@ -770,6 +795,7 @@
       "</div>" +
       resultLineHTML() +
       '<p class="addr-line">' + esc(model.label) + "</p>" +
+      devHTML(model.dev) +
       "<p>" + near + "</p>" +
       (bandText ? '<p class="margin-box ' + band + '">' + bandText + "</p>" : "") +
       un +
@@ -863,7 +889,9 @@
     getJSON(parcelUrl).catch(function () { return getJSON("data/parcels/_other.geojson"); })
       .then(function (fc) {
         var feat = findParcel(fc, row.pid);
-        var geom = feat ? feat.geometry : standInLot(row.lon, row.lat, row.lat);
+        var devFeat = feat ? findDevelopment(fc, feat.properties.dev) : null;
+        var dev = devFeat ? { name: devFeat.properties.name || "", n: devFeat.properties.n || 0 } : null;
+        var geom = devFeat ? devFeat.geometry : (feat ? feat.geometry : standInLot(row.lon, row.lat, row.lat));
         var usedStandIn = !feat;
         return measure(row, geom).then(function (m) {
           var model = {
@@ -876,6 +904,7 @@
             lat0: m.lat0,
             label: row.a + ", " + row.c + " " + row.z,
             subjectGeom: geom,
+            dev: dev,
             usedStandIn: usedStandIn,
             blockers: m.blockers,
             nearest: m.nearest,
